@@ -12,82 +12,87 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background: #f5f7fb;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Poppins', Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(145deg, #e9f0f5 0%, #d9e2ec 100%);
             min-height: 100vh;
-            padding: 16px;
+            padding: 20px;
         }
 
-        /* Conteneur principal centré sur l'employé */
-        .employee-container {
+        /* Conteneur principal */
+        .container {
             max-width: 550px;
             margin: 0 auto;
         }
 
         /* Carte principale */
-        .pointage-card {
-            background: white;
-            border-radius: 32px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        .card {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(2px);
+            border-radius: 48px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
             overflow: hidden;
-            margin-bottom: 16px;
+            transition: all 0.3s ease;
         }
 
-        /* En-tête avec logo - discret */
-        .card-header {
-            padding: 20px 24px 12px 24px;
+        /* En-tête KCC */
+        .header {
+            background: #0a2b3e;
+            padding: 24px 24px 20px 24px;
             text-align: center;
-            border-bottom: 1px solid #eef2f6;
         }
 
         .logo {
-            width: 70px;
+            width: 80px;
             height: auto;
-            margin-bottom: 8px;
+            background: white;
+            border-radius: 20px;
+            padding: 8px;
+            margin-bottom: 12px;
         }
 
-        .card-header h1 {
-            font-size: 20px;
+        .header h1 {
+            color: white;
+            font-size: 22px;
             font-weight: 600;
-            color: #1a2c3e;
+            letter-spacing: -0.3px;
         }
 
-        .card-header p {
+        .header p {
+            color: #9ab3c5;
             font-size: 13px;
-            color: #6c7a8e;
             margin-top: 4px;
         }
 
-        /* Corps du formulaire */
-        .card-body {
-            padding: 24px;
+        /* Corps */
+        .body {
+            padding: 28px 24px 32px 24px;
         }
 
-        /* Groupe de formulaire */
-        .form-group {
+        /* Groupe de champs */
+        .field-group {
             margin-bottom: 24px;
         }
 
         label {
             display: block;
             font-size: 14px;
-            font-weight: 500;
-            color: #2c3e50;
+            font-weight: 600;
+            color: #1e3a5f;
             margin-bottom: 8px;
         }
 
-        .required::after {
+        .required:after {
             content: "*";
-            color: #e74c3c;
+            color: #e53e3e;
             margin-left: 4px;
         }
 
         input, select {
             width: 100%;
-            padding: 14px 16px;
+            padding: 14px 18px;
             font-size: 16px;
-            border: 1.5px solid #e2e8f0;
-            border-radius: 16px;
+            border: 2px solid #e2edf7;
+            border-radius: 60px;
             background: white;
             transition: all 0.2s;
             font-family: inherit;
@@ -95,107 +100,130 @@
 
         input:focus, select:focus {
             outline: none;
-            border-color: #2c5f8a;
-            box-shadow: 0 0 0 3px rgba(44,95,138,0.1);
+            border-color: #2c6e9e;
+            box-shadow: 0 0 0 3px rgba(44, 110, 158, 0.2);
         }
 
-        /* Zone d'affichage du nom */
-        .employee-name-card {
-            background: #eef2fa;
-            border-radius: 20px;
-            padding: 16px;
+        /* Carte de bienvenue employé */
+        .welcome-card {
+            background: linear-gradient(135deg, #eef5fc 0%, #e0ebf5 100%);
+            border-radius: 32px;
+            padding: 18px 20px;
+            margin: 16px 0 20px 0;
             text-align: center;
-            margin: 16px 0;
-            display: none;
+            border: 1px solid rgba(44, 110, 158, 0.2);
+            transition: all 0.3s;
         }
 
-        .employee-name-card.show {
-            display: block;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .employee-avatar {
-            width: 60px;
-            height: 60px;
-            background: #2c5f8a;
+        .welcome-avatar {
+            width: 70px;
+            height: 70px;
+            background: #2c6e9e;
             border-radius: 50%;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
 
-        .employee-avatar span {
-            font-size: 28px;
-            color: white;
+        .welcome-avatar span {
+            font-size: 36px;
         }
 
-        .employee-name-card h3 {
-            font-size: 18px;
-            color: #1a2c3e;
+        .welcome-name {
+            font-size: 22px;
+            font-weight: 700;
+            color: #0a2b3e;
             margin-bottom: 4px;
         }
 
-        .employee-name-card p {
-            font-size: 13px;
-            color: #6c7a8e;
+        .welcome-matricule {
+            font-size: 14px;
+            color: #5a7d9a;
+            font-family: monospace;
+        }
+
+        .greeting {
+            font-size: 15px;
+            color: #2c6e9e;
+            margin-top: 8px;
+            font-weight: 500;
         }
 
         /* Zone GPS */
-        .gps-status {
-            background: #f8f9fc;
-            border-radius: 20px;
-            padding: 14px 16px;
+        .gps-box {
+            background: #f8fafd;
+            border-radius: 28px;
+            padding: 16px 20px;
             margin-bottom: 20px;
+            border: 1px solid #e2edf7;
             display: flex;
             align-items: center;
-            gap: 12px;
-            border: 1px solid #eef2f6;
+            gap: 14px;
+            flex-wrap: wrap;
         }
 
-        .gps-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #cbd5e1;
-            transition: all 0.3s;
+        .gps-icon {
+            width: 48px;
+            height: 48px;
+            background: #eef2f8;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
         }
 
-        .gps-dot.active {
-            background: #10b981;
-            box-shadow: 0 0 0 3px rgba(16,185,129,0.2);
-        }
-
-        .gps-dot.error {
-            background: #ef4444;
-        }
-
-        .gps-text {
+        .gps-info {
             flex: 1;
+        }
+
+        .gps-status {
+            font-weight: 600;
             font-size: 14px;
-            color: #4a5568;
+        }
+
+        .gps-status.active {
+            color: #2b9348;
+        }
+
+        .gps-status.inactive {
+            color: #e53e3e;
         }
 
         .gps-coords {
             font-size: 11px;
-            color: #94a3b8;
+            color: #7f8c8d;
             font-family: monospace;
+            margin-top: 4px;
         }
 
-        /* Zone photo */
-        .photo-zone {
-            background: #f8f9fc;
-            border-radius: 20px;
+        .btn-gps {
+            background: #2c6e9e;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 40px;
+            color: white;
+            font-weight: 500;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        /* Zone photo selfie */
+        .photo-area {
+            background: #f8fafd;
+            border-radius: 28px;
             padding: 20px;
             text-align: center;
             margin-bottom: 20px;
-            border: 2px dashed #cbd5e1;
+            border: 2px dashed #cbdde9;
             transition: all 0.2s;
         }
 
-        .photo-zone.has-photo {
-            border-color: #10b981;
-            background: #f0fdf4;
+        .photo-area.ready {
+            border-color: #2b9348;
+            background: #f0faf0;
         }
 
         .camera-preview {
@@ -203,7 +231,7 @@
             width: 100%;
             max-width: 280px;
             margin: 0 auto;
-            border-radius: 20px;
+            border-radius: 32px;
             overflow: hidden;
             background: #1a1a2e;
         }
@@ -215,105 +243,111 @@
             transform: scaleX(-1);
         }
 
-        .captured-photo {
+        .captured-img {
             width: 100%;
-            border-radius: 16px;
+            border-radius: 24px;
             margin-top: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
 
-        .btn-camera {
-            background: #2c5f8a;
-            color: white;
+        .btn-photo {
+            background: #2c6e9e;
             border: none;
-            padding: 12px 24px;
-            border-radius: 40px;
+            padding: 14px 24px;
+            border-radius: 60px;
+            color: white;
+            font-weight: 600;
             font-size: 15px;
-            font-weight: 500;
             cursor: pointer;
-            margin-top: 12px;
+            margin-top: 14px;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
 
-        .btn-camera:hover {
-            background: #1e3a5f;
-        }
-
-        .btn-retake {
-            background: #6c7a8e;
-            margin-left: 8px;
-        }
-
-        .photo-hint {
-            font-size: 12px;
-            color: #94a3b8;
-            margin-top: 12px;
+        .btn-photo:disabled {
+            background: #b0c4de;
+            cursor: not-allowed;
         }
 
         /* Boutons action */
-        .action-buttons {
+        .actions {
             display: flex;
-            gap: 12px;
-            margin-top: 24px;
+            gap: 14px;
+            margin: 24px 0 16px 0;
         }
 
         .btn {
             flex: 1;
             padding: 16px;
             border: none;
-            border-radius: 40px;
+            border-radius: 60px;
+            font-weight: 700;
             font-size: 16px;
-            font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
         }
 
-        .btn-arrival {
-            background: #10b981;
+        .btn-arrivee {
+            background: #2b9348;
             color: white;
         }
 
-        .btn-arrival:disabled {
-            background: #a7f3d0;
+        .btn-arrivee:disabled {
+            background: #a0c4a8;
             cursor: not-allowed;
         }
 
-        .btn-departure {
-            background: #f59e0b;
+        .btn-depart {
+            background: #e9a23b;
             color: white;
         }
 
-        .btn-departure:disabled {
-            background: #fde68a;
+        .btn-depart:disabled {
+            background: #f0cf9a;
             cursor: not-allowed;
         }
 
-        .btn-logout {
-            background: #eef2f6;
-            color: #6c7a8e;
-            margin-top: 12px;
+        .btn-deconnexion {
+            background: #eef2f8;
+            color: #5a7d9a;
+            width: 100%;
+        }
+
+        /* Minuteur */
+        .timer {
+            text-align: center;
+            margin-top: 16px;
+            font-size: 13px;
+            font-family: monospace;
+            color: #5a7d9a;
+            background: #f0f4f9;
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 40px;
+            width: auto;
+        }
+
+        .timer span {
+            font-weight: 700;
+            font-size: 16px;
+            color: #1e3a5f;
         }
 
         /* Bouton admin discret */
         .admin-link {
             text-align: center;
-            margin-top: 12px;
+            margin-top: 16px;
         }
 
         .admin-btn {
             background: transparent;
             border: none;
-            font-size: 12px;
-            color: #94a3b8;
+            font-size: 11px;
+            color: #9bb7d0;
             cursor: pointer;
             padding: 8px 16px;
-            border-radius: 20px;
-        }
-
-        .admin-btn:hover {
-            background: #eef2f6;
-            color: #2c5f8a;
+            border-radius: 40px;
         }
 
         /* Modal */
@@ -324,7 +358,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.6);
+            background: rgba(0, 0, 0, 0.6);
             z-index: 1000;
             align-items: center;
             justify-content: center;
@@ -334,513 +368,451 @@
             display: flex;
         }
 
-        .modal-content {
+        .modal-card {
             background: white;
-            border-radius: 32px;
-            padding: 32px 24px;
+            border-radius: 48px;
+            padding: 32px 28px;
             max-width: 320px;
             text-align: center;
-            animation: slideUp 0.3s ease;
+            animation: fadeUp 0.3s;
         }
 
         .modal-icon {
             font-size: 56px;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
 
-        .modal-title {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .modal-message {
-            color: #6c7a8e;
-            margin-bottom: 24px;
-        }
-
-        .modal-btn {
-            background: #2c5f8a;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 40px;
-            font-weight: 500;
-            cursor: pointer;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Loading */
-        .loading {
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            border: 2px solid white;
-            border-radius: 50%;
-            border-top-color: transparent;
-            animation: spin 0.6s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Responsive */
-        @media (max-width: 480px) {
-            body {
-                padding: 12px;
-            }
-            .card-body {
-                padding: 20px;
-            }
-            .action-buttons {
-                flex-direction: column;
-                gap: 10px;
-            }
+        footer {
+            text-align: center;
+            font-size: 11px;
+            color: #8ba3bc;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <div class="employee-container">
-        <div class="pointage-card">
-            <div class="card-header">
-                <img src="logokcc.jpeg" alt="KCC" class="logo" onerror="this.style.display='none'">
-                <h1>Pointage terrain</h1>
-                <p>Enregistrez votre présence sur site</p>
-            </div>
-            <div class="card-body">
-                <!-- Statut GPS -->
-                <div class="gps-status" id="gpsStatus">
-                    <div class="gps-dot" id="gpsDot"></div>
-                    <div class="gps-text">
-                        <span id="gpsMessage">Chargement GPS...</span>
-                        <div class="gps-coords" id="gpsCoords"></div>
-                    </div>
-                </div>
-
-                <!-- Matricule -->
-                <div class="form-group">
-                    <label class="required">Matricule</label>
-                    <input type="text" id="matricule" placeholder="Ex: S13001" autocomplete="off">
-                </div>
-
-                <!-- Carte d'identité employé -->
-                <div class="employee-name-card" id="employeeCard">
-                    <div class="employee-avatar">
-                        <span>👤</span>
-                    </div>
-                    <h3 id="employeeFullName"></h3>
-                    <p id="employeeMatricule"></p>
-                </div>
-
-                <!-- Lieu de travail -->
-                <div class="form-group">
-                    <label class="required">Lieu de travail</label>
-                    <select id="workLocation">
-                        <option value="">-- Sélectionnez --</option>
-                        <option value="Batiments_la_Vision">🏢 Bâtiments la Vision</option>
-                        <option value="Hotel_Moon_Palace">🏨 Hôtel Moon Palace</option>
-                        <option value="Hotel_Kolwezi_Lodge">🏨 Hotel Kolwezi Lodge</option>
-                        <option value="Direction_KCC">🏢 Direction KCC - Lusanga</option>
-                    </select>
-                </div>
-
-                <!-- Zone photo selfie -->
-                <div class="photo-zone" id="photoZone">
-                    <div style="margin-bottom: 8px;">📸 Photo de contrôle</div>
-                    <div class="camera-preview" id="cameraContainer" style="display: none;">
-                        <video id="video" autoplay playsinline></video>
-                    </div>
-                    <canvas id="canvas" style="display: none;"></canvas>
-                    <div id="photoPreview"></div>
-                    <button class="btn-camera" id="takePhotoBtn" style="display: none;">📷 Prendre la photo</button>
-                    <div class="photo-hint">La photo sera utilisée comme preuve de présence</div>
-                </div>
-
-                <!-- Boutons action -->
-                <div class="action-buttons">
-                    <button class="btn btn-arrival" id="arrivalBtn" disabled>✅ Arrivée</button>
-                    <button class="btn btn-departure" id="departureBtn" disabled>❌ Départ</button>
-                </div>
-
-                <button class="btn btn-logout" id="logoutBtn">Se déconnecter</button>
-            </div>
+<div class="container">
+    <div class="card">
+        <div class="header">
+            <img src="logokcc.jpeg" alt="KCC" class="logo" onerror="this.style.display='none'">
+            <h1>KAMOTO COPPER COMPANY</h1>
+            <p>Pointage terrain sécurisé</p>
         </div>
 
-        <!-- Bouton admin discret -->
-        <div class="admin-link">
-            <button class="admin-btn" id="adminBtn">⚙️ Administration</button>
+        <div class="body">
+            <!-- Matricule -->
+            <div class="field-group">
+                <label class="required">Matricule</label>
+                <input type="text" id="matricule" placeholder="Ex: S13001" autocomplete="off">
+            </div>
+
+            <!-- Carte de bienvenue (cachée au début) -->
+            <div id="welcomeZone" style="display: none;">
+                <div class="welcome-card">
+                    <div class="welcome-avatar">
+                        <span id="avatarIcon">👤</span>
+                    </div>
+                    <div class="welcome-name" id="empName"></div>
+                    <div class="welcome-matricule" id="empMat"></div>
+                    <div class="greeting" id="greetingMsg"></div>
+                </div>
+            </div>
+
+            <!-- Lieu de travail -->
+            <div class="field-group">
+                <label class="required">Lieu de travail</label>
+                <select id="workLocation">
+                    <option value="">-- Sélectionnez --</option>
+                    <option value="Batiments_la_Vision">🏢 Bâtiments la Vision</option>
+                    <option value="Hotel_Moon_Palace">🏨 Hôtel Moon Palace</option>
+                    <option value="Hotel_Kolwezi_Lodge">🏨 Hotel Kolwezi Lodge</option>
+                    <option value="Direction_KCC">🏢 Direction KCC - Lusanga</option>
+                </select>
+            </div>
+
+            <!-- Bloc GPS -->
+            <div class="gps-box" id="gpsBox">
+                <div class="gps-icon">📍</div>
+                <div class="gps-info">
+                    <div class="gps-status" id="gpsStatusText">En attente...</div>
+                    <div class="gps-coords" id="gpsCoordsText"></div>
+                </div>
+                <button class="btn-gps" id="requestGpsBtn">Autoriser GPS</button>
+            </div>
+
+            <!-- Zone photo selfie -->
+            <div class="photo-area" id="photoArea">
+                <div style="margin-bottom: 10px;">📸 <strong>Selfie de contrôle</strong></div>
+                <div class="camera-preview" id="cameraContainer" style="display: none;">
+                    <video id="video" autoplay playsinline></video>
+                </div>
+                <canvas id="canvas" style="display: none;"></canvas>
+                <div id="photoPreview"></div>
+                <button class="btn-photo" id="takePhotoBtn" disabled>📷 Prendre ma photo</button>
+                <div style="font-size: 12px; color: #8ba3bc; margin-top: 10px;">La photo prouve votre présence sur site</div>
+            </div>
+
+            <!-- Boutons arrivée/départ -->
+            <div class="actions">
+                <button class="btn btn-arrivee" id="arriveeBtn" disabled>✅ ARRIVÉE</button>
+                <button class="btn btn-depart" id="departBtn" disabled>❌ DÉPART</button>
+            </div>
+
+            <button class="btn btn-deconnexion" id="logoutBtn">Déconnexion</button>
+
+            <!-- Minuteur -->
+            <div style="text-align: center; margin-top: 18px;">
+                <div class="timer">🕐 <span id="clockTimer"></span></div>
+            </div>
         </div>
     </div>
 
-    <!-- Modal -->
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-icon" id="modalIcon">✓</div>
-            <div class="modal-title" id="modalTitle">Succès</div>
-            <div class="modal-message" id="modalMessage">Opération réussie</div>
-            <button class="modal-btn" onclick="closeModal()">Fermer</button>
-        </div>
+    <!-- Bouton admin discret -->
+    <div class="admin-link">
+        <button class="admin-btn" id="adminBtn">⚙️ administration</button>
     </div>
+    <footer>KCC • Pointage hors site</footer>
+</div>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-        import { getAuth, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
-        import { getFirestore, collection, addDoc, getDoc, doc, setDoc, Timestamp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
-        import { getStorage, ref, uploadString, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js";
+<!-- Modal -->
+<div id="modal" class="modal">
+    <div class="modal-card">
+        <div class="modal-icon" id="modalIcon">✓</div>
+        <h3 id="modalTitle">Succès</h3>
+        <p id="modalMessage" style="margin: 12px 0 20px; color: #5a7d9a;">Opération réussie</p>
+        <button class="btn-gps" onclick="closeModal()">Fermer</button>
+    </div>
+</div>
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyDkCnxIDdzngjnltxC9IBCV1Fk2JYSrKM0",
-            authDomain: "pointage-app-42339.firebaseapp.com",
-            projectId: "pointage-app-42339",
-            storageBucket: "pointage-app-42339.firebasestorage.app",
-            appId: "1:63257821944:web:e8e06472eacee7675eb10d"
-        };
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+    import { getFirestore, collection, addDoc, getDoc, doc, setDoc, Timestamp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+    import { getStorage, ref, uploadString, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js";
 
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-        const storage = getStorage(app);
+    // Firebase config
+    const firebaseConfig = {
+        apiKey: "AIzaSyDkCnxIDdzngjnltxC9IBCV1Fk2JYSrKM0",
+        authDomain: "pointage-app-42339.firebaseapp.com",
+        projectId: "pointage-app-42339",
+        storageBucket: "pointage-app-42339.firebasestorage.app",
+        appId: "1:63257821944:web:e8e06472eacee7675eb10d"
+    };
 
-        const validLocations = {
-            "Batiments_la_Vision": { lat: -10.7167, lng: 25.4667, radius: 500, name: "Bâtiments la Vision" },
-            "Hotel_Moon_Palace": { lat: -11.6614, lng: 27.4828, radius: 500, name: "Hôtel Moon Palace" },
-            "Hotel_Kolwezi_Lodge": { lat: -10.7167, lng: 25.4667, radius: 500, name: "Hotel Kolwezi Lodge" },
-            "Direction_KCC": { lat: -10.7167, lng: 25.4667, radius: 500, name: "Direction KCC" }
-        };
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    const storage = getStorage(app);
 
-        // Initialisation des travailleurs par défaut
-        const defaultWorkers = {
-            "S13001": "Josué Mulaj",
-            "S13002": "Shekinah Mukeni",
-            "S13003": "Patrick Kalenga",
-            "S13004": "Arnaud Luela",
-            "S13005": "Nadine Zola"
-        };
+    // Zones géographiques autorisées (tolérance 500m)
+    const validZones = {
+        "Batiments_la_Vision": { lat: -10.7167, lng: 25.4667, radius: 500, name: "Bâtiments la Vision" },
+        "Hotel_Moon_Palace": { lat: -11.6614, lng: 27.4828, radius: 500, name: "Hôtel Moon Palace" },
+        "Hotel_Kolwezi_Lodge": { lat: -10.7167, lng: 25.4667, radius: 500, name: "Hotel Kolwezi Lodge" },
+        "Direction_KCC": { lat: -10.7167, lng: 25.4667, radius: 500, name: "Direction KCC" }
+    };
 
-        async function initWorkers() {
-            for (const [mat, name] of Object.entries(defaultWorkers)) {
-                const ref = doc(db, "workers", mat);
-                const snap = await getDoc(ref);
-                if (!snap.exists()) {
-                    await setDoc(ref, { matricule: mat, name, active: true, createdAt: Timestamp.now() });
-                }
+    // Initialisation des employés par défaut
+    const defaultWorkers = {
+        "S13001": "Josué Mulaj",
+        "S13002": "Shekinah Mukeni",
+        "S13003": "Patrick Kalenga",
+        "S13004": "Arnaud Luela",
+        "S13005": "Nadine Zola"
+    };
+
+    async function initWorkers() {
+        for (const [mat, name] of Object.entries(defaultWorkers)) {
+            const refDoc = doc(db, "workers", mat);
+            const snap = await getDoc(refDoc);
+            if (!snap.exists()) {
+                await setDoc(refDoc, { matricule: mat, name, active: true, createdAt: Timestamp.now() });
             }
         }
-        initWorkers();
+    }
+    initWorkers();
 
-        // Variables
-        let currentEmployee = null;
-        let currentPhoto = null;
-        let currentLocation = null;
-        let videoStream = null;
-        let isLocationActive = false;
+    // Éléments DOM
+    const matriculeInput = document.getElementById('matricule');
+    const welcomeZone = document.getElementById('welcomeZone');
+    const empNameSpan = document.getElementById('empName');
+    const empMatSpan = document.getElementById('empMat');
+    const greetingMsg = document.getElementById('greetingMsg');
+    const workLocation = document.getElementById('workLocation');
+    const requestGpsBtn = document.getElementById('requestGpsBtn');
+    const gpsStatusText = document.getElementById('gpsStatusText');
+    const gpsCoordsText = document.getElementById('gpsCoordsText');
+    const takePhotoBtn = document.getElementById('takePhotoBtn');
+    const cameraContainer = document.getElementById('cameraContainer');
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
+    const photoPreview = document.getElementById('photoPreview');
+    const arriveeBtn = document.getElementById('arriveeBtn');
+    const departBtn = document.getElementById('departBtn');
+    const photoArea = document.getElementById('photoArea');
 
-        const matriculeInput = document.getElementById('matricule');
-        const employeeCard = document.getElementById('employeeCard');
-        const employeeFullName = document.getElementById('employeeFullName');
-        const employeeMatriculeSpan = document.getElementById('employeeMatricule');
-        const workLocation = document.getElementById('workLocation');
-        const arrivalBtn = document.getElementById('arrivalBtn');
-        const departureBtn = document.getElementById('departureBtn');
-        const takePhotoBtn = document.getElementById('takePhotoBtn');
-        const cameraContainer = document.getElementById('cameraContainer');
-        const video = document.getElementById('video');
-        const canvas = document.getElementById('canvas');
-        const photoPreview = document.getElementById('photoPreview');
-        const gpsMessage = document.getElementById('gpsMessage');
-        const gpsCoords = document.getElementById('gpsCoords');
-        const gpsDot = document.getElementById('gpsDot');
+    // Variables d'état
+    let currentEmployee = null;
+    let currentPhotoBase64 = null;
+    let currentLocation = null;
+    let gpsAuthorized = false;
+    let videoStream = null;
+    let photoTaken = false;
 
-        // Demander la géolocalisation immédiatement
-        function getLocation() {
-            gpsMessage.textContent = "Activation GPS...";
-            gpsDot.className = "gps-dot";
-            
-            if ("geolocation" in navigator) {
-                navigator.geolocation.getCurrentPosition(
-                    (position) => {
-                        currentLocation = {
-                            lat: position.coords.latitude,
-                            lng: position.coords.longitude,
-                            accuracy: position.coords.accuracy
-                        };
-                        isLocationActive = true;
-                        gpsDot.className = "gps-dot active";
-                        gpsMessage.textContent = "📍 GPS actif";
-                        gpsCoords.textContent = `${currentLocation.lat.toFixed(6)}, ${currentLocation.lng.toFixed(6)} (±${Math.round(currentLocation.accuracy)}m)`;
-                        checkReady();
-                    },
-                    (error) => {
-                        isLocationActive = false;
-                        gpsDot.className = "gps-dot error";
-                        let msg = "Erreur GPS";
-                        if (error.code === 1) msg = "Autorisez la géolocalisation";
-                        if (error.code === 2) msg = "Position indisponible";
-                        if (error.code === 3) msg = "Délai dépassé";
-                        gpsMessage.textContent = `❌ ${msg}`;
-                        gpsCoords.textContent = "Activez le GPS pour pointer";
-                        showModal("⚠️ GPS requis", "Veuillez autoriser la géolocalisation pour pouvoir pointer");
-                    },
-                    { enableHighAccuracy: true, timeout: 10000 }
-                );
+    // Minuteur (heure locale)
+    function updateClock() {
+        const now = new Date();
+        const timeStr = now.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        document.getElementById('clockTimer').innerText = timeStr;
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    // Afficher un message modal
+    function showModal(title, message, isError = false) {
+        const modal = document.getElementById('modal');
+        document.getElementById('modalTitle').innerText = title;
+        document.getElementById('modalMessage').innerText = message;
+        document.getElementById('modalIcon').innerHTML = isError ? '❌' : '✅';
+        modal.classList.add('show');
+        setTimeout(() => {
+            modal.classList.remove('show');
+        }, 3000);
+    }
+    window.closeModal = () => document.getElementById('modal').classList.remove('show');
+
+    // Vérifier la distance par rapport au site
+    function isWithinZone(lat, lng, siteKey) {
+        const zone = validZones[siteKey];
+        if (!zone) return false;
+        const R = 6371e3;
+        const φ1 = lat * Math.PI/180;
+        const φ2 = zone.lat * Math.PI/180;
+        const Δφ = (zone.lat - lat) * Math.PI/180;
+        const Δλ = (zone.lng - lng) * Math.PI/180;
+        const a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+                  Math.cos(φ1) * Math.cos(φ2) *
+                  Math.sin(Δλ/2) * Math.sin(Δλ/2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        const distance = R * c;
+        return distance <= zone.radius;
+    }
+
+    // Activer la vérification des conditions
+    function checkReadyToPoint() {
+        const hasLocation = gpsAuthorized && currentLocation && workLocation.value;
+        let locationOk = false;
+        if (hasLocation) {
+            locationOk = isWithinZone(currentLocation.lat, currentLocation.lng, workLocation.value);
+            if (!locationOk) {
+                gpsStatusText.innerHTML = "⚠️ Hors zone autorisée";
+                gpsStatusText.style.color = "#e53e3e";
             } else {
-                gpsMessage.textContent = "❌ GPS non supporté";
-                gpsDot.className = "gps-dot error";
+                gpsStatusText.innerHTML = "✅ Zone validée";
+                gpsStatusText.style.color = "#2b9348";
             }
         }
+        const canPoint = currentEmployee !== null && photoTaken === true && locationOk === true;
+        arriveeBtn.disabled = !canPoint;
+        departBtn.disabled = !canPoint;
+        return canPoint;
+    }
 
-        getLocation();
-
-        // Vérifier matricule
-        matriculeInput.addEventListener('input', async function() {
-            const mat = this.value.trim();
-            if (mat.length >= 5) {
-                const workerRef = doc(db, "workers", mat);
-                const snap = await getDoc(workerRef);
-                if (snap.exists()) {
-                    currentEmployee = snap.data();
-                    employeeFullName.textContent = currentEmployee.name;
-                    employeeMatriculeSpan.textContent = currentEmployee.matricule;
-                    employeeCard.classList.add('show');
-                    startCamera();
-                } else {
-                    currentEmployee = null;
-                    employeeCard.classList.remove('show');
-                    stopCamera();
-                }
+    // Quand on entre le matricule
+    matriculeInput.addEventListener('input', async function() {
+        const mat = this.value.trim();
+        if (mat.length >= 5) {
+            const workerDoc = await getDoc(doc(db, "workers", mat));
+            if (workerDoc.exists()) {
+                currentEmployee = workerDoc.data();
+                empNameSpan.innerText = currentEmployee.name;
+                empMatSpan.innerText = currentEmployee.matricule;
+                const hour = new Date().getHours();
+                let greet = "";
+                if (hour < 12) greet = "Bonjour";
+                else if (hour < 18) greet = "Bon après-midi";
+                else greet = "Bonsoir";
+                greetingMsg.innerHTML = `${greet} ${currentEmployee.name.split(' ')[0]} 👋`;
+                welcomeZone.style.display = "block";
+                // Demander automatiquement la géolocalisation
+                requestLocation();
             } else {
                 currentEmployee = null;
-                employeeCard.classList.remove('show');
-                stopCamera();
+                welcomeZone.style.display = "none";
+                showModal("Matricule invalide", "Cet identifiant n'existe pas", true);
             }
-            checkReady();
-        });
-
-        // Démarrer caméra
-        async function startCamera() {
-            if (videoStream) stopCamera();
-            try {
-                videoStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } });
-                video.srcObject = videoStream;
-                cameraContainer.style.display = 'block';
-                takePhotoBtn.style.display = 'inline-flex';
-            } catch (err) {
-                console.error("Camera error:", err);
-                showModal("📷 Caméra", "Impossible d'accéder à la caméra");
-            }
-        }
-
-        function stopCamera() {
-            if (videoStream) {
-                videoStream.getTracks().forEach(t => t.stop());
-                videoStream = null;
-            }
-            video.srcObject = null;
-            cameraContainer.style.display = 'none';
-            takePhotoBtn.style.display = 'none';
-        }
-
-        // Prendre la photo
-        takePhotoBtn.addEventListener('click', function() {
-            if (!video.videoWidth) return;
-            
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
-            const ctx = canvas.getContext('2d');
-            ctx.save();
-            ctx.scale(-1, 1);
-            ctx.drawImage(video, -canvas.width, 0, canvas.width, canvas.height);
-            ctx.restore();
-            
-            currentPhoto = canvas.toDataURL('image/jpeg', 0.8);
-            
-            const img = document.createElement('img');
-            img.src = currentPhoto;
-            img.style.width = '100%';
-            img.style.borderRadius = '16px';
-            img.style.marginTop = '12px';
-            photoPreview.innerHTML = '';
-            photoPreview.appendChild(img);
-            
-            document.getElementById('photoZone').classList.add('has-photo');
-            takePhotoBtn.textContent = '📸 Re-prendre';
-            
-            stopCamera();
-            checkReady();
-        });
-
-        // Valider la localisation
-        function isLocationValid() {
-            if (!currentLocation || !workLocation.value) return false;
-            const site = validLocations[workLocation.value];
-            if (!site) return false;
-            
-            const R = 6371e3;
-            const φ1 = currentLocation.lat * Math.PI/180;
-            const φ2 = site.lat * Math.PI/180;
-            const Δφ = (site.lat - currentLocation.lat) * Math.PI/180;
-            const Δλ = (site.lng - currentLocation.lng) * Math.PI/180;
-            
-            const a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
-                      Math.cos(φ1) * Math.cos(φ2) *
-                      Math.sin(Δλ/2) * Math.sin(Δλ/2);
-            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-            const distance = R * c;
-            
-            return distance <= site.radius;
-        }
-
-        // Vérifier si tout est prêt
-        function checkReady() {
-            const hasEmployee = currentEmployee !== null;
-            const hasPhoto = currentPhoto !== null;
-            const hasLocation = isLocationActive && workLocation.value && isLocationValid();
-            
-            arrivalBtn.disabled = !(hasEmployee && hasPhoto && hasLocation);
-            departureBtn.disabled = !(hasEmployee && hasPhoto && hasLocation);
-            
-            // Feedback visuel sur la localisation
-            if (workLocation.value && currentLocation && !isLocationValid()) {
-                gpsMessage.textContent = "⚠️ Vous êtes hors zone autorisée";
-                gpsMessage.style.color = "#ef4444";
-            } else if (workLocation.value && isLocationValid()) {
-                gpsMessage.textContent = "✅ Vous êtes dans la zone autorisée";
-                gpsMessage.style.color = "#10b981";
-            } else {
-                gpsMessage.style.color = "#4a5568";
-            }
-        }
-
-        workLocation.addEventListener('change', checkReady);
-
-        // Sauvegarder pointage
-        async function savePointage(type) {
-            if (!isLocationValid()) {
-                showModal("📍 Hors zone", "Vous n'êtes pas à l'emplacement autorisé pour ce site");
-                return;
-            }
-            
-            arrivalBtn.disabled = true;
-            departureBtn.disabled = true;
-            
-            const loadingMsg = showModal("⏳ Enregistrement", "Veuillez patienter...", false);
-            
-            try {
-                const site = workLocation.value;
-                const siteName = workLocation.options[workLocation.selectedIndex].text;
-                
-                // Upload photo
-                const photoRef = ref(storage, `pointages/${Date.now()}_${currentEmployee.matricule}.jpg`);
-                await uploadString(photoRef, currentPhoto, 'data_url');
-                const photoURL = await getDownloadURL(photoRef);
-                
-                // Enregistrement
-                await addDoc(collection(db, "pointages"), {
-                    matricule: currentEmployee.matricule,
-                    nom: currentEmployee.name,
-                    lieu: site,
-                    lieuName: siteName,
-                    type: type,
-                    photoURL: photoURL,
-                    location: currentLocation,
-                    timestamp: Timestamp.now(),
-                    date: new Date().toISOString().split('T')[0],
-                    time: new Date().toLocaleTimeString('fr-FR')
-                });
-                
-                showModal(`✅ ${type} enregistrée`, `${currentEmployee.name} - ${siteName}\n${new Date().toLocaleTimeString('fr-FR')}`);
-                
-                // Réinitialiser
-                resetForm();
-                
-            } catch (error) {
-                console.error(error);
-                showModal("❌ Erreur", "Problème de connexion, réessayez");
-                arrivalBtn.disabled = false;
-                departureBtn.disabled = false;
-            }
-        }
-
-        function resetForm() {
-            currentPhoto = null;
-            photoPreview.innerHTML = '';
-            document.getElementById('photoZone').classList.remove('has-photo');
-            matriculeInput.value = '';
-            workLocation.value = '';
+        } else {
             currentEmployee = null;
-            employeeCard.classList.remove('show');
-            takePhotoBtn.textContent = '📷 Prendre la photo';
-            startCamera();
-            checkReady();
+            welcomeZone.style.display = "none";
         }
+        checkReadyToPoint();
+    });
 
-        arrivalBtn.addEventListener('click', () => savePointage("Arrivée"));
-        departureBtn.addEventListener('click', () => savePointage("Départ"));
-
-        // Modal
-        function showModal(title, message, autoClose = true) {
-            const modal = document.getElementById('modal');
-            const modalTitle = document.getElementById('modalTitle');
-            const modalMessage = document.getElementById('modalMessage');
-            const modalIcon = document.getElementById('modalIcon');
-            
-            modalTitle.textContent = title;
-            modalMessage.textContent = message;
-            
-            if (title.includes("✅")) modalIcon.textContent = "✓";
-            else if (title.includes("❌")) modalIcon.textContent = "✗";
-            else if (title.includes("⏳")) modalIcon.textContent = "⏳";
-            else modalIcon.textContent = "ℹ️";
-            
-            modal.classList.add('show');
-            
-            if (autoClose) {
-                setTimeout(() => {
-                    modal.classList.remove('show');
-                }, 2500);
-            }
-            return modal;
+    // Demander la géolocalisation
+    function requestLocation() {
+        if (!navigator.geolocation) {
+            gpsStatusText.innerHTML = "GPS non supporté";
+            return;
         }
-        
-        window.closeModal = function() {
-            document.getElementById('modal').classList.remove('show');
-        };
+        gpsStatusText.innerHTML = "⌛ Autorisation GPS en cours...";
+        navigator.geolocation.getCurrentPosition(
+            (pos) => {
+                currentLocation = {
+                    lat: pos.coords.latitude,
+                    lng: pos.coords.longitude,
+                    accuracy: pos.coords.accuracy
+                };
+                gpsAuthorized = true;
+                gpsStatusText.innerHTML = "📍 GPS actif";
+                gpsStatusText.style.color = "#2b9348";
+                gpsCoordsText.innerHTML = `${currentLocation.lat.toFixed(6)} , ${currentLocation.lng.toFixed(6)} (±${Math.round(currentLocation.accuracy)}m)`;
+                checkReadyToPoint();
+                // Activer la caméra pour le selfie
+                enableCamera();
+            },
+            (err) => {
+                gpsAuthorized = false;
+                gpsStatusText.innerHTML = "❌ GPS refusé";
+                gpsStatusText.style.color = "#e53e3e";
+                gpsCoordsText.innerHTML = "Autorisez la géolocalisation pour pointer";
+                showModal("Géolocalisation", "Veuillez autoriser l'accès à votre position", true);
+            },
+            { enableHighAccuracy: true, timeout: 10000 }
+        );
+    }
 
-        // Déconnexion
-        document.getElementById('logoutBtn').addEventListener('click', async () => {
-            stopCamera();
+    requestGpsBtn.addEventListener('click', () => requestLocation());
+
+    // Activer la caméra
+    async function enableCamera() {
+        if (videoStream) stopCamera();
+        try {
+            videoStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } });
+            video.srcObject = videoStream;
+            cameraContainer.style.display = "block";
+            takePhotoBtn.disabled = false;
+        } catch (err) {
+            console.error("Caméra bloquée");
+            showModal("Caméra", "Impossible d'accéder à votre caméra", true);
+        }
+    }
+
+    function stopCamera() {
+        if (videoStream) {
+            videoStream.getTracks().forEach(t => t.stop());
+            videoStream = null;
+        }
+        video.srcObject = null;
+        cameraContainer.style.display = "none";
+    }
+
+    // Prendre la photo
+    takePhotoBtn.addEventListener('click', () => {
+        if (!video.videoWidth) return;
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        const ctx = canvas.getContext('2d');
+        ctx.save();
+        ctx.scale(-1, 1);
+        ctx.drawImage(video, -canvas.width, 0, canvas.width, canvas.height);
+        ctx.restore();
+
+        currentPhotoBase64 = canvas.toDataURL('image/jpeg', 0.8);
+        const imgElem = document.createElement('img');
+        imgElem.src = currentPhotoBase64;
+        imgElem.style.width = '100%';
+        imgElem.style.borderRadius = '24px';
+        imgElem.style.marginTop = '12px';
+        photoPreview.innerHTML = '';
+        photoPreview.appendChild(imgElem);
+        photoTaken = true;
+        photoArea.classList.add('ready');
+        takePhotoBtn.innerText = "📸 Photo prise ✓";
+        takePhotoBtn.disabled = true;
+        stopCamera();
+        checkReadyToPoint();
+        showModal("Selfie validé", "Votre photo a été enregistrée", false);
+    });
+
+    // Enregistrer le pointage
+    async function savePointage(type) {
+        if (!checkReadyToPoint()) {
+            showModal("Blocage", "Vérifiez : matricule, photo, GPS et lieu", true);
+            return;
+        }
+        arriveeBtn.disabled = true;
+        departBtn.disabled = true;
+        try {
+            const siteKey = workLocation.value;
+            const siteName = workLocation.options[workLocation.selectedIndex].text;
+            // Upload photo Firebase Storage
+            const photoRef = ref(storage, `pointages/${Date.now()}_${currentEmployee.matricule}.jpg`);
+            await uploadString(photoRef, currentPhotoBase64, 'data_url');
+            const photoURL = await getDownloadURL(photoRef);
+
+            await addDoc(collection(db, "pointages"), {
+                matricule: currentEmployee.matricule,
+                nom: currentEmployee.name,
+                lieu: siteKey,
+                lieuName: siteName,
+                type: type,
+                photoURL: photoURL,
+                location: currentLocation,
+                timestamp: Timestamp.now(),
+                date: new Date().toISOString().split('T')[0],
+                time: new Date().toLocaleTimeString('fr-FR')
+            });
+            showModal(`✅ ${type} enregistrée`, `${currentEmployee.name} - ${siteName} à ${new Date().toLocaleTimeString('fr-FR')}`);
             resetForm();
-            showModal("👋 Déconnecté", "À bientôt");
-            setTimeout(() => location.reload(), 1500);
-        });
+        } catch (err) {
+            console.error(err);
+            showModal("Erreur réseau", "Impossible d'enregistrer, réessayez", true);
+            arriveeBtn.disabled = false;
+            departBtn.disabled = false;
+        }
+    }
 
-        // Admin discret
-        document.getElementById('adminBtn').addEventListener('click', () => {
-            const email = prompt("Email administrateur:");
-            if (!email) return;
-            const password = prompt("Mot de passe:");
-            if (!password) return;
-            
-            signInWithEmailAndPassword(auth, email, password)
-                .then(() => {
-                    window.location.href = 'admin.html';
-                })
-                .catch(() => {
-                    showModal("❌ Accès refusé", "Identifiants incorrects");
-                });
-        });
+    function resetForm() {
+        currentPhotoBase64 = null;
+        photoTaken = false;
+        photoPreview.innerHTML = '';
+        photoArea.classList.remove('ready');
+        takePhotoBtn.innerText = "📷 Prendre ma photo";
+        takePhotoBtn.disabled = true;
+        currentEmployee = null;
+        welcomeZone.style.display = "none";
+        matriculeInput.value = '';
+        workLocation.value = '';
+        gpsAuthorized = false;
+        currentLocation = null;
+        gpsStatusText.innerHTML = "En attente...";
+        gpsCoordsText.innerHTML = "";
+        cameraContainer.style.display = "none";
+        stopCamera();
+        arriveeBtn.disabled = true;
+        departBtn.disabled = true;
+    }
 
-        console.log("Application KCC prête");
-    </script>
+    arriveeBtn.addEventListener('click', () => savePointage("Arrivée"));
+    departBtn.addEventListener('click', () => savePointage("Départ"));
+    document.getElementById('logoutBtn').addEventListener('click', () => { resetForm(); showModal("Déconnecté", "À bientôt sur KCC", false); setTimeout(() => location.reload(), 1500); });
+
+    // Admin discret
+    document.getElementById('adminBtn').addEventListener('click', () => {
+        const email = prompt("Email admin :");
+        if (!email) return;
+        const pwd = prompt("Mot de passe :");
+        signInWithEmailAndPassword(auth, email, pwd)
+            .then(() => window.location.href = 'admin.html')
+            .catch(() => showModal("Accès refusé", "Identifiants incorrects", true));
+    });
+
+    workLocation.addEventListener('change', () => checkReadyToPoint());
+</script>
 </body>
 </html>

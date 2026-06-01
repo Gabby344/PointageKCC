@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KCC | Application de Pointage</title>
+    <style>
+        /* CSS Intégré */
+        :root {
+            --kcc-blue: #003366;
+            --kcc-yellow: #ffcc00;
+        }
+
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            background: #f4f7f6; 
+            margin: 0; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+        }
+
+        .container { width: 90%; max-width: 400px; }
+
+        .card { 
+            background: white; 
+            padding: 25px; 
+            border-radius: 15px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
+            text-align: center;
+        }
+
+        header h1 { color: var(--kcc-blue); margin-bottom: 5px; }
+
+        input { 
+            width: 100%; 
+            padding: 12px; 
+            margin-bottom: 20px; 
+            border: 2px solid #ddd; 
+            border-radius: 8px; 
+            box-sizing: border-box; 
+        }
+
+        .btn-arrive { 
+            background: var(--kcc-blue); 
+            color: white; 
+            width: 100%; 
+            padding: 15px; 
+            border: none; 
+            border-radius: 8px; 
+            font-weight: bold; 
+            margin-bottom: 10px; 
+            cursor: pointer;
+        }
+
+        .btn-depart { 
+            background: var(--kcc-yellow); 
+            color: #333; 
+            width: 100%; 
+            padding: 15px; 
+            border: none; 
+            border-radius: 8px; 
+            font-weight: bold; 
+            cursor: pointer;
+        }
+
+        #status-message { margin-top: 15px; font-weight: bold; color: #555; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="card">
+            <header>
+                <h1>KCC - Pointage</h1>
+                <p>Kolwezi, RDC</p>
+            </header>
+
+            <input type="text" id="matricule" placeholder="Entrez votre matricule">
+            
+            <div class="actions">
+                <button id="btn-arrive" class="btn-arrive">Arrivée</button>
+                <button id="btn-depart" class="btn-depart">Départ</button>
+            </div>
+            
+            <div id="status-message"></div>
+        </div>
+    </div>
+
+    <!-- Script qui appelle app.js -->
+    <script type="module" src="app.js"></script>
+</body>
+</html>

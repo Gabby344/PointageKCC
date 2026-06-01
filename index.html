@@ -2,49 +2,774 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KCC | Portail de Pointage</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>KCC Pointage - Travailleurs Hors Site</title>
     <style>
-        :root { --kcc-blue: #003366; --kcc-yellow: #ffcc00; }
-        body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; display: flex; justify-content: center; padding: 20px; }
-        .card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 100%; max-width: 400px; text-align: center; }
-        .logo { width: 120px; margin-bottom: 20px; }
-        input, select { width: 100%; padding: 15px; margin: 10px 0; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; }
-        button { width: 100%; padding: 15px; margin: 10px 0; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; }
-        .btn-primary { background: var(--kcc-blue); color: white; }
-        #nom-display { font-weight: bold; color: var(--kcc-blue); display: block; margin: 10px 0; }
-        #admin-panel { display: none; margin-top: 20px; border-top: 2px solid #eee; padding-top: 20px; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --kcc-blue: #003366;
+            --kcc-yellow: #ffcc00;
+            --kcc-dark: #002244;
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #ffc107;
+            --info: #17a2b8;
+            --gray-light: #f5f5f5;
+            --gray-dark: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            margin: 10px 0;
+        }
+
+        .subtitle {
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+
+        .logo {
+            width: 120px;
+            background: white;
+            padding: 10px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px 25px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            margin-bottom: 20px;
+        }
+
+        .card h2 {
+            color: var(--kcc-blue);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Form inputs */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--gray-dark);
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--kcc-blue);
+            box-shadow: 0 0 0 3px rgba(0,51,102,0.1);
+        }
+
+        select.input-field {
+            cursor: pointer;
+            background: white;
+        }
+
+        /* Buttons */
+        .btn {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-primary {
+            background: var(--kcc-blue);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-warning {
+            background: var(--warning);
+            color: #333;
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        .btn-camera {
+            background: var(--info);
+            color: white;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .action-buttons .btn {
+            flex: 1;
+            margin: 0;
+        }
+
+        hr {
+            margin: 20px 0;
+            border: none;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        /* Status badges */
+        .status-badge {
+            padding: 12px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+            background: var(--gray-light);
+            color: var(--gray-dark);
+        }
+
+        .status-badge.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status-badge.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .dot.red { background: var(--danger); }
+        .dot.green { background: var(--success); }
+        .dot.yellow { background: var(--warning); }
+
+        /* Employee name display */
+        .employee-name {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .employee-name .success {
+            color: var(--success);
+        }
+
+        .employee-name .error {
+            color: var(--danger);
+        }
+
+        /* Video and photo */
+        .photo-section {
+            margin: 20px 0;
+        }
+
+        .video-container {
+            background: #000;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .video-preview {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .photo-preview {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .photo-captured {
+            max-width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 30% auto;
+            padding: 30px;
+            width: 80%;
+            max-width: 300px;
+            border-radius: 20px;
+            text-align: center;
+            animation: slideUp 0.3s;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .close {
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #aaa;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        .success-icon {
+            font-size: 60px;
+            color: var(--success);
+            margin: 20px 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            .card {
+                padding: 20px 15px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .header h1 {
+                font-size: 1.4rem;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="card">
-        <img src="logokcc.jpeg" class="logo">
-        <div id="login-form">
-            <input type="email" id="email" placeholder="Email Admin">
-            <input type="password" id="password" placeholder="Mot de passe">
-            <button class="btn-primary" onclick="login()">Se connecter</button>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <img src="logokcc.jpeg" alt="KCC Logo" class="logo" onerror="this.src='https://via.placeholder.com/120x60?text=KCC'">
+            <h1>Pointage Hors Site</h1>
+            <p class="subtitle">Système de pointage sécurisé avec géolocalisation</p>
         </div>
-        <div id="pointage-form" style="display:none;">
-            <input type="text" id="matricule" placeholder="Matricule" oninput="trouverNom()">
-            <span id="nom-display"></span>
-            <select id="lieu">
-                <option value="">Choisir lieu</option>
-                <option value="Bâtiments la Vision">Bâtiments la Vision</option>
-                <option value="Hôtel Moon Palace">Hôtel Moon Palace</option>
-                <option value="Hotel Kolwezi Lodge">Hotel Kolwezi Lodge</option>
-                <option value="Direction KCC avenue Lusanga">Direction KCC avenue Lusanga</option>
-            </select>
-            <button class="btn-primary" onclick="pointer('Arrivée')">Enregistrer Arrivée</button>
-            <video id="video" autoplay playsinline style="display:none; width:100%"></video>
-            <canvas id="canvas" style="display:none;"></canvas>
-            <button onclick="logout()" style="background:#666; color:white;">Déconnexion</button>
+
+        <!-- Login Admin Section -->
+        <div class="login-section" id="loginSection">
+            <div class="card">
+                <h2>🔐 Accès Administrateur</h2>
+                <div class="form-group">
+                    <label>Email administrateur</label>
+                    <input type="email" id="adminEmail" placeholder="admin@kcc.com" class="input-field">
+                </div>
+                <div class="form-group">
+                    <label>Mot de passe</label>
+                    <input type="password" id="adminPassword" placeholder="••••••••" class="input-field">
+                </div>
+                <button class="btn btn-primary" onclick="adminLogin()">Se connecter</button>
+                <hr>
+                <button class="btn btn-secondary" onclick="showWorkerPointage()">👷 Mode Travailleur</button>
+            </div>
         </div>
-        <button class="btn-primary" onclick="toggleAdmin()">Accès Admin</button>
-        <div id="admin-panel">
-            <h3>Historique Admin</h3>
-            <table id="table-pointages" border="1" style="width:100%; font-size:12px;"></table>
+
+        <!-- Worker Pointage Section -->
+        <div class="pointage-section" id="pointageSection" style="display:none;">
+            <div class="card">
+                <div class="status-badge" id="locationStatus">
+                    <span class="dot red"></span> ⚠️ Géolocalisation non activée
+                </div>
+                
+                <div class="form-group">
+                    <label>📋 Matricule</label>
+                    <input type="text" id="matricule" placeholder="Ex: S13001" class="input-field" oninput="findEmployee()">
+                    <div id="employeeName" class="employee-name"></div>
+                </div>
+
+                <div class="form-group">
+                    <label>📍 Lieu de travail</label>
+                    <select id="workLocation" class="input-field">
+                        <option value="">Sélectionnez un lieu</option>
+                        <option value="Batiments_la_Vision">🏢 Bâtiments la Vision</option>
+                        <option value="Hotel_Moon_Palace">🏨 Hôtel Moon Palace</option>
+                        <option value="Hotel_Kolwezi_Lodge">🏨 Hotel Kolwezi Lodge</option>
+                        <option value="Direction_KCC">🏢 Direction KCC avenue Lusanga</option>
+                    </select>
+                </div>
+
+                <div class="photo-section" id="photoSection" style="display:none;">
+                    <div class="video-container">
+                        <video id="video" autoplay playsinline class="video-preview"></video>
+                        <canvas id="canvas" style="display:none;"></canvas>
+                    </div>
+                    <button class="btn btn-camera" onclick="capturePhoto()">
+                        📸 Prendre la photo
+                    </button>
+                    <div id="photoPreview" class="photo-preview"></div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn btn-success" onclick="registerArrival()" id="arrivalBtn" disabled>
+                        ✅ Arrivée
+                    </button>
+                    <button class="btn btn-warning" onclick="registerDeparture()" id="departureBtn" disabled>
+                        ❌ Départ
+                    </button>
+                </div>
+
+                <button class="btn btn-danger" onclick="logout()">🚪 Déconnexion</button>
+            </div>
+        </div>
+
+        <!-- Success Modal -->
+        <div id="successModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <div class="success-icon">✓</div>
+                <h3 id="modalMessage">Pointage enregistré !</h3>
+            </div>
         </div>
     </div>
-    <script type="module" src="app.js"></script>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+        import { getFirestore, collection, addDoc, getDoc, doc, setDoc, Timestamp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { getStorage, ref, uploadString, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js";
+
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDkCnxIDdzngjnltxC9IBCV1Fk2JYSrKM0",
+            authDomain: "pointage-app-42339.firebaseapp.com",
+            projectId: "pointage-app-42339",
+            storageBucket: "pointage-app-42339.firebasestorage.app",
+            appId: "1:63257821944:web:e8e06472eacee7675eb10d"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const storage = getStorage(app);
+
+        // Valid locations for geofencing
+        const validLocations = {
+            "Batiments_la_Vision": { lat: -10.7167, lng: 25.4667, radius: 500, name: "Bâtiments la Vision" },
+            "Hotel_Moon_Palace": { lat: -11.6614, lng: 27.4828, radius: 500, name: "Hôtel Moon Palace" },
+            "Hotel_Kolwezi_Lodge": { lat: -10.7167, lng: 25.4667, radius: 500, name: "Hotel Kolwezi Lodge" },
+            "Direction_KCC": { lat: -10.7167, lng: 25.4667, radius: 500, name: "Direction KCC" }
+        };
+
+        // Initialize default workers
+        const initializeWorkers = async () => {
+            const defaultWorkers = {
+                "S13001": "Josué Mulaj",
+                "S13002": "Shekinah Mukeni",
+                "S13003": "Patrick Kalenga",
+                "S13004": "Arnaud Luela",
+                "S13005": "Nadine Zola"
+            };
+            
+            for (const [matricule, name] of Object.entries(defaultWorkers)) {
+                const workerRef = doc(db, "workers", matricule);
+                const workerSnap = await getDoc(workerRef);
+                if (!workerSnap.exists()) {
+                    await setDoc(workerRef, { 
+                        matricule, 
+                        name, 
+                        active: true, 
+                        createdAt: Timestamp.now() 
+                    });
+                }
+            }
+        };
+
+        initializeWorkers();
+
+        // Global variables
+        let currentEmployee = null;
+        let currentPhoto = null;
+        let currentLocation = null;
+        let videoStream = null;
+
+        // Helper functions
+        window.closeModal = function() {
+            document.getElementById('successModal').style.display = 'none';
+        };
+
+        function showMessage(message, autoClose = true) {
+            const modal = document.getElementById('successModal');
+            const modalMessage = document.getElementById('modalMessage');
+            modalMessage.textContent = message;
+            modal.style.display = 'block';
+            
+            if (autoClose) {
+                setTimeout(() => {
+                    modal.style.display = 'none';
+                }, 2000);
+            }
+        }
+
+        // Admin login
+        window.adminLogin = async () => {
+            const email = document.getElementById('adminEmail').value;
+            const password = document.getElementById('adminPassword').value;
+            
+            if (!email || !password) {
+                showMessage('Veuillez remplir tous les champs');
+                return;
+            }
+            
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+                window.location.href = 'admin.html';
+            } catch (error) {
+                showMessage('Email ou mot de passe incorrect');
+            }
+        };
+
+        // Show worker pointage
+        window.showWorkerPointage = () => {
+            document.getElementById('loginSection').style.display = 'none';
+            document.getElementById('pointageSection').style.display = 'block';
+            requestLocation();
+        };
+
+        // Request geolocation
+        const requestLocation = () => {
+            const statusDiv = document.getElementById('locationStatus');
+            statusDiv.innerHTML = '<span class="dot yellow"></span> ⏳ Activation de la géolocalisation...';
+            
+            if ("geolocation" in navigator) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        currentLocation = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude,
+                            accuracy: position.coords.accuracy
+                        };
+                        statusDiv.innerHTML = '<span class="dot green"></span> ✅ Géolocalisation activée';
+                        statusDiv.className = 'status-badge success';
+                    },
+                    (error) => {
+                        let errorMsg = "Échec géolocalisation";
+                        if (error.code === 1) errorMsg = "Veuillez autoriser la géolocalisation";
+                        if (error.code === 2) errorMsg = "Position non disponible";
+                        if (error.code === 3) errorMsg = "Délai d'attente dépassé";
+                        
+                        statusDiv.innerHTML = `<span class="dot red"></span> ❌ ${errorMsg}`;
+                        statusDiv.className = 'status-badge error';
+                    }
+                );
+            } else {
+                statusDiv.innerHTML = '<span class="dot red"></span> ❌ Géolocalisation non supportée';
+                statusDiv.className = 'status-badge error';
+            }
+        };
+
+        // Find employee
+        window.findEmployee = async () => {
+            const matricule = document.getElementById('matricule').value;
+            
+            if (matricule.length < 3) {
+                document.getElementById('employeeName').innerHTML = '';
+                currentEmployee = null;
+                updateButtons();
+                return;
+            }
+            
+            const workerRef = doc(db, "workers", matricule);
+            const workerSnap = await getDoc(workerRef);
+            
+            if (workerSnap.exists()) {
+                currentEmployee = workerSnap.data();
+                document.getElementById('employeeName').innerHTML = `<span class="success">✅ ${currentEmployee.name}</span>`;
+                document.getElementById('photoSection').style.display = 'block';
+                startCamera();
+            } else {
+                document.getElementById('employeeName').innerHTML = '<span class="error">❌ Matricule invalide</span>';
+                document.getElementById('photoSection').style.display = 'none';
+                currentEmployee = null;
+                if (videoStream) {
+                    videoStream.getTracks().forEach(track => track.stop());
+                }
+            }
+            
+            updateButtons();
+        };
+
+        // Start camera
+        const startCamera = async () => {
+            try {
+                const video = document.getElementById('video');
+                if (videoStream) {
+                    videoStream.getTracks().forEach(track => track.stop());
+                }
+                videoStream = await navigator.mediaDevices.getUserMedia({ 
+                    video: { facingMode: "user" } 
+                });
+                video.srcObject = videoStream;
+            } catch (err) {
+                console.error("Camera error:", err);
+                showMessage("Impossible d'accéder à la caméra");
+            }
+        };
+
+        // Capture photo
+        window.capturePhoto = () => {
+            const video = document.getElementById('video');
+            const canvas = document.getElementById('canvas');
+            const context = canvas.getContext('2d');
+            
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            
+            currentPhoto = canvas.toDataURL('image/jpeg', 0.8);
+            
+            const preview = document.getElementById('photoPreview');
+            preview.innerHTML = `<img src="${currentPhoto}" class="photo-captured">`;
+            preview.style.display = 'block';
+            
+            updateButtons();
+        };
+
+        // Validate location
+        const validateLocation = (location, site) => {
+            if (!location || !validLocations[site]) return false;
+            
+            const siteLocation = validLocations[site];
+            const R = 6371e3;
+            const φ1 = location.lat * Math.PI/180;
+            const φ2 = siteLocation.lat * Math.PI/180;
+            const Δφ = (siteLocation.lat - location.lat) * Math.PI/180;
+            const Δλ = (siteLocation.lng - location.lng) * Math.PI/180;
+
+            const a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+                      Math.cos(φ1) * Math.cos(φ2) *
+                      Math.sin(Δλ/2) * Math.sin(Δλ/2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            const distance = R * c;
+            
+            return distance <= siteLocation.radius;
+        };
+
+        // Register arrival
+        window.registerArrival = async () => {
+            if (!validatePointage()) return;
+            
+            const site = document.getElementById('workLocation').value;
+            const isLocationValid = validateLocation(currentLocation, site);
+            
+            if (!isLocationValid) {
+                showMessage("❌ Vous n'êtes pas à l'emplacement autorisé pour ce site!");
+                return;
+            }
+            
+            await savePointage("Arrivée");
+        };
+
+        // Register departure
+        window.registerDeparture = async () => {
+            if (!validatePointage()) return;
+            await savePointage("Départ");
+        };
+
+        // Validate pointage
+        const validatePointage = () => {
+            if (!currentEmployee) {
+                showMessage("Veuillez entrer un matricule valide");
+                return false;
+            }
+            
+            if (!currentPhoto) {
+                showMessage("Veuillez prendre une photo");
+                return false;
+            }
+            
+            const site = document.getElementById('workLocation').value;
+            if (!site) {
+                showMessage("Veuillez sélectionner un lieu");
+                return false;
+            }
+            
+            if (!currentLocation) {
+                showMessage("Veuillez activer la géolocalisation");
+                return false;
+            }
+            
+            return true;
+        };
+
+        // Save pointage
+        const savePointage = async (type) => {
+            showMessage("Enregistrement en cours...", false);
+            
+            try {
+                const site = document.getElementById('workLocation').value;
+                const siteName = document.getElementById('workLocation').options[document.getElementById('workLocation').selectedIndex].text;
+                
+                // Upload photo
+                const photoRef = ref(storage, `pointages/${Date.now()}_${currentEmployee.matricule}.jpg`);
+                await uploadString(photoRef, currentPhoto, 'data_url');
+                const photoURL = await getDownloadURL(photoRef);
+                
+                // Save record
+                await addDoc(collection(db, "pointages"), {
+                    matricule: currentEmployee.matricule,
+                    nom: currentEmployee.name,
+                    lieu: site,
+                    lieuName: siteName,
+                    type: type,
+                    photoURL: photoURL,
+                    location: currentLocation,
+                    timestamp: Timestamp.now(),
+                    date: new Date().toISOString().split('T')[0],
+                    time: new Date().toLocaleTimeString('fr-FR')
+                });
+                
+                showMessage(`✅ ${type} enregistrée avec succès!`);
+                resetPointage();
+                
+            } catch (error) {
+                console.error(error);
+                showMessage("❌ Erreur lors de l'enregistrement");
+            }
+        };
+
+        // Reset form
+        const resetPointage = () => {
+            currentPhoto = null;
+            document.getElementById('photoPreview').innerHTML = '';
+            document.getElementById('photoPreview').style.display = 'none';
+            document.getElementById('matricule').value = '';
+            document.getElementById('employeeName').innerHTML = '';
+            document.getElementById('workLocation').value = '';
+            document.getElementById('photoSection').style.display = 'none';
+            currentEmployee = null;
+            
+            if (videoStream) {
+                videoStream.getTracks().forEach(track => track.stop());
+                videoStream = null;
+            }
+            
+            updateButtons();
+        };
+
+        // Update buttons state
+        const updateButtons = () => {
+            const arrivalBtn = document.getElementById('arrivalBtn');
+            const departureBtn = document.getElementById('departureBtn');
+            const enabled = currentEmployee && currentPhoto;
+            
+            arrivalBtn.disabled = !enabled;
+            departureBtn.disabled = !enabled;
+        };
+
+        // Logout
+        window.logout = async () => {
+            if (videoStream) {
+                videoStream.getTracks().forEach(track => track.stop());
+            }
+            await signOut(auth);
+            location.reload();
+        };
+    </script>
 </body>
 </html>

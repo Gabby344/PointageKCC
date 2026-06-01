@@ -5,90 +5,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KCC | Application de Pointage</title>
     <style>
-        /* CSS Intégré */
         :root {
             --kcc-blue: #003366;
             --kcc-yellow: #ffcc00;
         }
 
-        body { 
-            font-family: 'Segoe UI', sans-serif; 
-            background: #f4f7f6; 
-            margin: 0; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            min-height: 100vh; 
-        }
+        body { font-family: 'Segoe UI', sans-serif; background: #f4f7f6; margin: 0; padding: 20px; display: flex; justify-content: center; min-height: 100vh; }
+        .container { width: 100%; max-width: 400px; text-align: center; }
+        .logo { width: 120px; margin-bottom: 15px; }
+        .card { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        
+        header h1 { color: var(--kcc-blue); margin: 0; font-size: 24px; }
+        header p { color: #666; margin-bottom: 20px; }
 
-        .container { width: 90%; max-width: 400px; }
-
-        .card { 
-            background: white; 
-            padding: 25px; 
-            border-radius: 15px; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
-            text-align: center;
-        }
-
-        header h1 { color: var(--kcc-blue); margin-bottom: 5px; }
-
-        input { 
-            width: 100%; 
-            padding: 12px; 
-            margin-bottom: 20px; 
-            border: 2px solid #ddd; 
-            border-radius: 8px; 
-            box-sizing: border-box; 
-        }
-
-        .btn-arrive { 
-            background: var(--kcc-blue); 
-            color: white; 
-            width: 100%; 
-            padding: 15px; 
-            border: none; 
-            border-radius: 8px; 
-            font-weight: bold; 
-            margin-bottom: 10px; 
-            cursor: pointer;
-        }
-
-        .btn-depart { 
-            background: var(--kcc-yellow); 
-            color: #333; 
-            width: 100%; 
-            padding: 15px; 
-            border: none; 
-            border-radius: 8px; 
-            font-weight: bold; 
-            cursor: pointer;
-        }
-
-        #status-message { margin-top: 15px; font-weight: bold; color: #555; }
+        input, select { width: 100%; padding: 12px; margin-bottom: 15px; border: 2px solid #ddd; border-radius: 8px; box-sizing: border-box; }
+        
+        .btn-arrive { background: var(--kcc-blue); color: white; width: 100%; padding: 15px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-bottom: 10px; }
+        .btn-depart { background: var(--kcc-yellow); color: #333; width: 100%; padding: 15px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
+        
+        #status-message { margin-top: 15px; font-weight: bold; padding: 10px; border-radius: 5px; }
+        .admin-section { margin-top: 30px; }
+        #admin-panel { display: none; background: #fff; padding: 15px; border-radius: 10px; border: 1px solid #ddd; text-align: left; }
     </style>
 </head>
 <body>
 
     <div class="container">
+        <img src="logokcc.jpeg" alt="Logo KCC" class="logo">
+        
         <div class="card">
             <header>
-                <h1>KCC - Pointage</h1>
+                <h1>Pointage</h1>
                 <p>Kolwezi, RDC</p>
             </header>
 
-            <input type="text" id="matricule" placeholder="Entrez votre matricule">
+            <input type="text" id="matricule" placeholder="Votre matricule (ex: S13001)">
             
-            <div class="actions">
-                <button id="btn-arrive" class="btn-arrive">Arrivée</button>
-                <button id="btn-depart" class="btn-depart">Départ</button>
-            </div>
+            <select id="lieu">
+                <option value="">Sélectionnez le lieu</option>
+                <option value="Bâtiments la Vision">Bâtiments la Vision</option>
+                <option value="Hôtel Moon Palace">Hôtel Moon Palace</option>
+                <option value="Hotel Kolwezi Lodge">Hotel Kolwezi Lodge</option>
+                <option value="Direction KCC avenue Lusanga">Direction KCC avenue Lusanga</option>
+            </select>
+
+            <button class="btn-arrive" onclick="pointer('Arrivée')">Arrivée</button>
+            <button class="btn-depart" onclick="pointer('Départ')">Départ</button>
             
             <div id="status-message"></div>
+            
+            <video id="video" autoplay playsinline style="display:none; width:100%; border-radius:8px;"></video>
+            <canvas id="canvas" style="display:none;"></canvas>
+        </div>
+
+        <div class="admin-section">
+            <button onclick="toggleAdmin()" style="background:#444; color:white; border:none; padding:10px 20px; border-radius:5px; cursor:pointer;">Accès Administrateur</button>
+            <div id="admin-panel">
+                <h3>Historique</h3>
+                <table id="table-pointages" border="1" style="width:100%; border-collapse:collapse; font-size:12px;">
+                    <tr><th>Agent</th><th>Lieu</th><th>Type</th><th>Heure</th></tr>
+                </table>
+            </div>
         </div>
     </div>
 
-    <!-- Script qui appelle app.js -->
     <script type="module" src="app.js"></script>
 </body>
 </html>

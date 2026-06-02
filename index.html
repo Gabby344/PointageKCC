@@ -2,8 +2,8 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>KCC Pointage | Employé</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KCC Pointage</title>
     <style>
         * {
             margin: 0;
@@ -12,807 +12,615 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Poppins', Roboto, Helvetica, Arial, sans-serif;
-            background: linear-gradient(145deg, #e9f0f5 0%, #d9e2ec 100%);
-            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background: #f0f2f5;
             padding: 20px;
         }
 
-        /* Conteneur principal */
         .container {
-            max-width: 550px;
+            max-width: 500px;
             margin: 0 auto;
         }
 
-        /* Carte principale */
         .card {
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(2px);
-            border-radius: 48px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        /* En-tête KCC */
-        .header {
-            background: #0a2b3e;
-            padding: 24px 24px 20px 24px;
-            text-align: center;
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
         .logo {
-            width: 80px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo img {
+            width: 100px;
             height: auto;
-            background: white;
-            border-radius: 20px;
-            padding: 8px;
-            margin-bottom: 12px;
         }
 
-        .header h1 {
-            color: white;
-            font-size: 22px;
-            font-weight: 600;
-            letter-spacing: -0.3px;
+        h1 {
+            font-size: 24px;
+            color: #003366;
+            margin-bottom: 5px;
         }
 
-        .header p {
-            color: #9ab3c5;
-            font-size: 13px;
-            margin-top: 4px;
+        .subtitle {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 14px;
         }
 
-        /* Corps */
-        .body {
-            padding: 28px 24px 32px 24px;
-        }
-
-        /* Groupe de champs */
-        .field-group {
-            margin-bottom: 24px;
+        .form-group {
+            margin-bottom: 20px;
         }
 
         label {
             display: block;
-            font-size: 14px;
-            font-weight: 600;
-            color: #1e3a5f;
             margin-bottom: 8px;
-        }
-
-        .required:after {
-            content: "*";
-            color: #e53e3e;
-            margin-left: 4px;
+            font-weight: bold;
+            color: #333;
         }
 
         input, select {
             width: 100%;
-            padding: 14px 18px;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
             font-size: 16px;
-            border: 2px solid #e2edf7;
-            border-radius: 60px;
-            background: white;
-            transition: all 0.2s;
-            font-family: inherit;
         }
 
-        input:focus, select:focus {
-            outline: none;
-            border-color: #2c6e9e;
-            box-shadow: 0 0 0 3px rgba(44, 110, 158, 0.2);
-        }
-
-        /* Carte de bienvenue employé */
-        .welcome-card {
-            background: linear-gradient(135deg, #eef5fc 0%, #e0ebf5 100%);
-            border-radius: 32px;
-            padding: 18px 20px;
-            margin: 16px 0 20px 0;
-            text-align: center;
-            border: 1px solid rgba(44, 110, 158, 0.2);
-            transition: all 0.3s;
-        }
-
-        .welcome-avatar {
-            width: 70px;
-            height: 70px;
-            background: #2c6e9e;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 12px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-        }
-
-        .welcome-avatar span {
-            font-size: 36px;
-        }
-
-        .welcome-name {
-            font-size: 22px;
-            font-weight: 700;
-            color: #0a2b3e;
-            margin-bottom: 4px;
-        }
-
-        .welcome-matricule {
-            font-size: 14px;
-            color: #5a7d9a;
-            font-family: monospace;
-        }
-
-        .greeting {
-            font-size: 15px;
-            color: #2c6e9e;
-            margin-top: 8px;
-            font-weight: 500;
-        }
-
-        /* Zone GPS */
-        .gps-box {
-            background: #f8fafd;
-            border-radius: 28px;
-            padding: 16px 20px;
-            margin-bottom: 20px;
-            border: 1px solid #e2edf7;
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            flex-wrap: wrap;
-        }
-
-        .gps-icon {
-            width: 48px;
-            height: 48px;
-            background: #eef2f8;
-            border-radius: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-        }
-
-        .gps-info {
-            flex: 1;
-        }
-
-        .gps-status {
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        .gps-status.active {
-            color: #2b9348;
-        }
-
-        .gps-status.inactive {
-            color: #e53e3e;
-        }
-
-        .gps-coords {
-            font-size: 11px;
-            color: #7f8c8d;
-            font-family: monospace;
-            margin-top: 4px;
-        }
-
-        .btn-gps {
-            background: #2c6e9e;
+        button {
+            width: 100%;
+            padding: 14px;
             border: none;
-            padding: 10px 18px;
-            border-radius: 40px;
-            color: white;
-            font-weight: 500;
-            font-size: 13px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
+            margin-top: 10px;
         }
 
-        /* Zone photo selfie */
-        .photo-area {
-            background: #f8fafd;
-            border-radius: 28px;
-            padding: 20px;
+        .btn-primary {
+            background: #003366;
+            color: white;
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-warning {
+            background: #ffc107;
+            color: #333;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .info-box {
+            background: #e8f4f8;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
             text-align: center;
-            margin-bottom: 20px;
-            border: 2px dashed #cbdde9;
-            transition: all 0.2s;
         }
 
-        .photo-area.ready {
-            border-color: #2b9348;
-            background: #f0faf0;
+        .success-box {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        .error-box {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            text-align: center;
         }
 
         .camera-preview {
-            position: relative;
             width: 100%;
-            max-width: 280px;
-            margin: 0 auto;
-            border-radius: 32px;
+            max-width: 300px;
+            margin: 10px auto;
+            border-radius: 10px;
             overflow: hidden;
-            background: #1a1a2e;
         }
 
-        .camera-preview video {
+        video, .captured-photo {
             width: 100%;
-            height: auto;
-            display: block;
-            transform: scaleX(-1);
+            border-radius: 10px;
         }
 
-        .captured-img {
-            width: 100%;
-            border-radius: 24px;
-            margin-top: 12px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-        }
-
-        .btn-photo {
-            background: #2c6e9e;
-            border: none;
-            padding: 14px 24px;
-            border-radius: 60px;
-            color: white;
-            font-weight: 600;
-            font-size: 15px;
-            cursor: pointer;
-            margin-top: 14px;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .btn-photo:disabled {
-            background: #b0c4de;
-            cursor: not-allowed;
-        }
-
-        /* Boutons action */
-        .actions {
-            display: flex;
-            gap: 14px;
-            margin: 24px 0 16px 0;
-        }
-
-        .btn {
-            flex: 1;
-            padding: 16px;
-            border: none;
-            border-radius: 60px;
-            font-weight: 700;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .btn-arrivee {
-            background: #2b9348;
-            color: white;
-        }
-
-        .btn-arrivee:disabled {
-            background: #a0c4a8;
-            cursor: not-allowed;
-        }
-
-        .btn-depart {
-            background: #e9a23b;
-            color: white;
-        }
-
-        .btn-depart:disabled {
-            background: #f0cf9a;
-            cursor: not-allowed;
-        }
-
-        .btn-deconnexion {
-            background: #eef2f8;
-            color: #5a7d9a;
-            width: 100%;
-        }
-
-        /* Minuteur */
-        .timer {
+        .admin-link {
             text-align: center;
-            margin-top: 16px;
-            font-size: 13px;
-            font-family: monospace;
-            color: #5a7d9a;
-            background: #f0f4f9;
-            display: inline-block;
-            padding: 6px 14px;
-            border-radius: 40px;
+            margin-top: 15px;
+        }
+
+        .admin-link button {
+            background: none;
+            color: #999;
+            font-size: 12px;
+            padding: 5px;
             width: auto;
         }
 
-        .timer span {
-            font-weight: 700;
-            font-size: 16px;
-            color: #1e3a5f;
-        }
-
-        /* Bouton admin discret */
-        .admin-link {
+        .timer {
             text-align: center;
-            margin-top: 16px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #003366;
+            margin-bottom: 15px;
         }
 
-        .admin-btn {
-            background: transparent;
-            border: none;
-            font-size: 11px;
-            color: #9bb7d0;
-            cursor: pointer;
-            padding: 8px 16px;
-            border-radius: 40px;
-        }
-
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal.show {
+        .flex-buttons {
             display: flex;
+            gap: 10px;
         }
 
-        .modal-card {
-            background: white;
-            border-radius: 48px;
-            padding: 32px 28px;
-            max-width: 320px;
-            text-align: center;
-            animation: fadeUp 0.3s;
-        }
-
-        .modal-icon {
-            font-size: 56px;
-            margin-bottom: 12px;
-        }
-
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        footer {
-            text-align: center;
-            font-size: 11px;
-            color: #8ba3bc;
-            margin-top: 20px;
+        .flex-buttons button {
+            flex: 1;
         }
     </style>
 </head>
 <body>
-<div class="container">
-    <div class="card">
-        <div class="header">
-            <img src="logokcc.jpeg" alt="KCC" class="logo" onerror="this.style.display='none'">
-            <h1>KAMOTO COPPER COMPANY</h1>
-            <p>Pointage terrain sécurisé</p>
-        </div>
+    <div class="container">
+        <div class="card">
+            <div class="logo">
+                <img src="logokcc.jpeg" alt="KCC" onerror="this.style.display='none'">
+                <h1>KCC Pointage</h1>
+                <div class="subtitle">Système de pointage hors site</div>
+            </div>
 
-        <div class="body">
-            <!-- Matricule -->
-            <div class="field-group">
-                <label class="required">Matricule</label>
+            <!-- Minuteur -->
+            <div class="timer" id="timer">--:--:--</div>
+
+            <!-- Zone matricule -->
+            <div class="form-group">
+                <label>Matricule</label>
                 <input type="text" id="matricule" placeholder="Ex: S13001" autocomplete="off">
+                <div id="nomEmploye" style="margin-top: 10px; font-weight: bold; color: #003366;"></div>
             </div>
 
-            <!-- Carte de bienvenue (cachée au début) -->
-            <div id="welcomeZone" style="display: none;">
-                <div class="welcome-card">
-                    <div class="welcome-avatar">
-                        <span id="avatarIcon">👤</span>
-                    </div>
-                    <div class="welcome-name" id="empName"></div>
-                    <div class="welcome-matricule" id="empMat"></div>
-                    <div class="greeting" id="greetingMsg"></div>
-                </div>
-            </div>
-
-            <!-- Lieu de travail -->
-            <div class="field-group">
-                <label class="required">Lieu de travail</label>
-                <select id="workLocation">
-                    <option value="">-- Sélectionnez --</option>
-                    <option value="Batiments_la_Vision">🏢 Bâtiments la Vision</option>
-                    <option value="Hotel_Moon_Palace">🏨 Hôtel Moon Palace</option>
-                    <option value="Hotel_Kolwezi_Lodge">🏨 Hotel Kolwezi Lodge</option>
-                    <option value="Direction_KCC">🏢 Direction KCC - Lusanga</option>
+            <!-- Zone lieu -->
+            <div class="form-group">
+                <label>Lieu de travail</label>
+                <select id="lieu">
+                    <option value="">Sélectionnez un lieu</option>
+                    <option value="Batiments_la_Vision">Bâtiments la Vision</option>
+                    <option value="Hotel_Moon_Palace">Hôtel Moon Palace</option>
+                    <option value="Hotel_Kolwezi_Lodge">Hotel Kolwezi Lodge</option>
+                    <option value="Direction_KCC">Direction KCC</option>
                 </select>
             </div>
 
-            <!-- Bloc GPS -->
-            <div class="gps-box" id="gpsBox">
-                <div class="gps-icon">📍</div>
-                <div class="gps-info">
-                    <div class="gps-status" id="gpsStatusText">En attente...</div>
-                    <div class="gps-coords" id="gpsCoordsText"></div>
+            <!-- Zone GPS -->
+            <div class="info-box" id="gpsBox">
+                <div>📍 Statut GPS: <span id="gpsStatus">Non activé</span></div>
+                <div id="gpsCoords" style="font-size: 12px; margin-top: 5px;"></div>
+                <button id="btnGps" class="btn-secondary" style="margin-top: 10px;">Activer GPS</button>
+            </div>
+
+            <!-- Zone photo -->
+            <div class="form-group">
+                <label>Photo de contrôle</label>
+                <div id="cameraSection">
+                    <div class="camera-preview">
+                        <video id="video" autoplay playsinline style="display: none;"></video>
+                        <canvas id="canvas" style="display: none;"></canvas>
+                        <div id="photoPreview"></div>
+                    </div>
+                    <button id="btnPhoto" class="btn-secondary" disabled>📷 Prendre la photo</button>
                 </div>
-                <button class="btn-gps" id="requestGpsBtn">Autoriser GPS</button>
             </div>
 
-            <!-- Zone photo selfie -->
-            <div class="photo-area" id="photoArea">
-                <div style="margin-bottom: 10px;">📸 <strong>Selfie de contrôle</strong></div>
-                <div class="camera-preview" id="cameraContainer" style="display: none;">
-                    <video id="video" autoplay playsinline></video>
-                </div>
-                <canvas id="canvas" style="display: none;"></canvas>
-                <div id="photoPreview"></div>
-                <button class="btn-photo" id="takePhotoBtn" disabled>📷 Prendre ma photo</button>
-                <div style="font-size: 12px; color: #8ba3bc; margin-top: 10px;">La photo prouve votre présence sur site</div>
+            <!-- Boutons action -->
+            <div class="flex-buttons">
+                <button id="btnArrivee" class="btn-success" disabled>✅ ARRIVÉE</button>
+                <button id="btnDepart" class="btn-warning" disabled>❌ DÉPART</button>
             </div>
 
-            <!-- Boutons arrivée/départ -->
-            <div class="actions">
-                <button class="btn btn-arrivee" id="arriveeBtn" disabled>✅ ARRIVÉE</button>
-                <button class="btn btn-depart" id="departBtn" disabled>❌ DÉPART</button>
-            </div>
+            <button id="btnReset" class="btn-danger" style="margin-top: 10px;">🔄 Réinitialiser</button>
+        </div>
 
-            <button class="btn btn-deconnexion" id="logoutBtn">Déconnexion</button>
-
-            <!-- Minuteur -->
-            <div style="text-align: center; margin-top: 18px;">
-                <div class="timer">🕐 <span id="clockTimer"></span></div>
-            </div>
+        <!-- Bouton admin discret -->
+        <div class="admin-link">
+            <button id="btnAdmin">⚙️ Administration</button>
         </div>
     </div>
 
-    <!-- Bouton admin discret -->
-    <div class="admin-link">
-        <button class="admin-btn" id="adminBtn">⚙️ administration</button>
+    <!-- Message modal simple -->
+    <div id="modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 1000;">
+        <div style="background: white; padding: 30px; border-radius: 20px; text-align: center; max-width: 300px;">
+            <div id="modalMessage" style="margin-bottom: 20px; font-size: 18px;"></div>
+            <button onclick="closeModal()" style="padding: 10px 20px; background: #003366; color: white; border: none; border-radius: 10px;">Fermer</button>
+        </div>
     </div>
-    <footer>KCC • Pointage hors site</footer>
-</div>
 
-<!-- Modal -->
-<div id="modal" class="modal">
-    <div class="modal-card">
-        <div class="modal-icon" id="modalIcon">✓</div>
-        <h3 id="modalTitle">Succès</h3>
-        <p id="modalMessage" style="margin: 12px 0 20px; color: #5a7d9a;">Opération réussie</p>
-        <button class="btn-gps" onclick="closeModal()">Fermer</button>
-    </div>
-</div>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+        import { getFirestore, collection, addDoc, getDoc, doc, setDoc, Timestamp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { getStorage, ref, uploadString, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js";
 
-<script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-    import { getAuth, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
-    import { getFirestore, collection, addDoc, getDoc, doc, setDoc, Timestamp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
-    import { getStorage, ref, uploadString, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js";
+        // Configuration Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyDkCnxIDdzngjnltxC9IBCV1Fk2JYSrKM0",
+            authDomain: "pointage-app-42339.firebaseapp.com",
+            projectId: "pointage-app-42339",
+            storageBucket: "pointage-app-42339.firebasestorage.app",
+            appId: "1:63257821944:web:e8e06472eacee7675eb10d"
+        };
 
-    // Firebase config
-    const firebaseConfig = {
-        apiKey: "AIzaSyDkCnxIDdzngjnltxC9IBCV1Fk2JYSrKM0",
-        authDomain: "pointage-app-42339.firebaseapp.com",
-        projectId: "pointage-app-42339",
-        storageBucket: "pointage-app-42339.firebasestorage.app",
-        appId: "1:63257821944:web:e8e06472eacee7675eb10d"
-    };
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const storage = getStorage(app);
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
-    const storage = getStorage(app);
+        // Données des employés
+        const employes = {
+            "S13001": "Josué Mulaj",
+            "S13002": "Shekinah Mukeni",
+            "S13003": "Patrick Kalenga",
+            "S13004": "Arnaud Luela",
+            "S13005": "Nadine Zola"
+        };
 
-    // Zones géographiques autorisées (tolérance 500m)
-    const validZones = {
-        "Batiments_la_Vision": { lat: -10.7167, lng: 25.4667, radius: 500, name: "Bâtiments la Vision" },
-        "Hotel_Moon_Palace": { lat: -11.6614, lng: 27.4828, radius: 500, name: "Hôtel Moon Palace" },
-        "Hotel_Kolwezi_Lodge": { lat: -10.7167, lng: 25.4667, radius: 500, name: "Hotel Kolwezi Lodge" },
-        "Direction_KCC": { lat: -10.7167, lng: 25.4667, radius: 500, name: "Direction KCC" }
-    };
+        // Coordonnées des sites (à ajuster avec les vraies coordonnées)
+        const sitesCoords = {
+            "Batiments_la_Vision": { lat: -10.7167, lng: 25.4667, rayon: 1000 },
+            "Hotel_Moon_Palace": { lat: -11.6614, lng: 27.4828, rayon: 1000 },
+            "Hotel_Kolwezi_Lodge": { lat: -10.7167, lng: 25.4667, rayon: 1000 },
+            "Direction_KCC": { lat: -10.7167, lng: 25.4667, rayon: 1000 }
+        };
 
-    // Initialisation des employés par défaut
-    const defaultWorkers = {
-        "S13001": "Josué Mulaj",
-        "S13002": "Shekinah Mukeni",
-        "S13003": "Patrick Kalenga",
-        "S13004": "Arnaud Luela",
-        "S13005": "Nadine Zola"
-    };
+        // Variables globales
+        let currentMatricule = null;
+        let currentNom = null;
+        let currentPhoto = null;
+        let currentPosition = null;
+        let videoStream = null;
+        let photoPrise = false;
+        let gpsValide = false;
 
-    async function initWorkers() {
-        for (const [mat, name] of Object.entries(defaultWorkers)) {
-            const refDoc = doc(db, "workers", mat);
-            const snap = await getDoc(refDoc);
-            if (!snap.exists()) {
-                await setDoc(refDoc, { matricule: mat, name, active: true, createdAt: Timestamp.now() });
-            }
+        // Éléments DOM
+        const matriculeInput = document.getElementById('matricule');
+        const nomDisplay = document.getElementById('nomEmploye');
+        const lieuSelect = document.getElementById('lieu');
+        const gpsStatus = document.getElementById('gpsStatus');
+        const gpsCoords = document.getElementById('gpsCoords');
+        const btnGps = document.getElementById('btnGps');
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const photoPreview = document.getElementById('photoPreview');
+        const btnPhoto = document.getElementById('btnPhoto');
+        const btnArrivee = document.getElementById('btnArrivee');
+        const btnDepart = document.getElementById('btnDepart');
+        const btnReset = document.getElementById('btnReset');
+        const btnAdmin = document.getElementById('btnAdmin');
+
+        // Minuteur
+        function updateTimer() {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('fr-FR');
+            document.getElementById('timer').textContent = timeStr;
         }
-    }
-    initWorkers();
+        updateTimer();
+        setInterval(updateTimer, 1000);
 
-    // Éléments DOM
-    const matriculeInput = document.getElementById('matricule');
-    const welcomeZone = document.getElementById('welcomeZone');
-    const empNameSpan = document.getElementById('empName');
-    const empMatSpan = document.getElementById('empMat');
-    const greetingMsg = document.getElementById('greetingMsg');
-    const workLocation = document.getElementById('workLocation');
-    const requestGpsBtn = document.getElementById('requestGpsBtn');
-    const gpsStatusText = document.getElementById('gpsStatusText');
-    const gpsCoordsText = document.getElementById('gpsCoordsText');
-    const takePhotoBtn = document.getElementById('takePhotoBtn');
-    const cameraContainer = document.getElementById('cameraContainer');
-    const video = document.getElementById('video');
-    const canvas = document.getElementById('canvas');
-    const photoPreview = document.getElementById('photoPreview');
-    const arriveeBtn = document.getElementById('arriveeBtn');
-    const departBtn = document.getElementById('departBtn');
-    const photoArea = document.getElementById('photoArea');
+        // Message modal
+        window.showMessage = function(message, isError = false) {
+            const modal = document.getElementById('modal');
+            const modalMsg = document.getElementById('modalMessage');
+            modalMsg.textContent = message;
+            modalMsg.style.color = isError ? '#dc3545' : '#28a745';
+            modal.style.display = 'flex';
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 3000);
+        };
+        window.closeModal = function() {
+            document.getElementById('modal').style.display = 'none';
+        };
 
-    // Variables d'état
-    let currentEmployee = null;
-    let currentPhotoBase64 = null;
-    let currentLocation = null;
-    let gpsAuthorized = false;
-    let videoStream = null;
-    let photoTaken = false;
+        // Vérifier si tout est prêt pour pointer
+        function verifierPrets() {
+            const lieuOk = lieuSelect.value !== "";
+            const prets = (currentNom !== null && photoPrise === true && gpsValide === true && lieuOk === true);
+            btnArrivee.disabled = !prets;
+            btnDepart.disabled = !prets;
+            return prets;
+        }
 
-    // Minuteur (heure locale)
-    function updateClock() {
-        const now = new Date();
-        const timeStr = now.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-        document.getElementById('clockTimer').innerText = timeStr;
-    }
-    updateClock();
-    setInterval(updateClock, 1000);
-
-    // Afficher un message modal
-    function showModal(title, message, isError = false) {
-        const modal = document.getElementById('modal');
-        document.getElementById('modalTitle').innerText = title;
-        document.getElementById('modalMessage').innerText = message;
-        document.getElementById('modalIcon').innerHTML = isError ? '❌' : '✅';
-        modal.classList.add('show');
-        setTimeout(() => {
-            modal.classList.remove('show');
-        }, 3000);
-    }
-    window.closeModal = () => document.getElementById('modal').classList.remove('show');
-
-    // Vérifier la distance par rapport au site
-    function isWithinZone(lat, lng, siteKey) {
-        const zone = validZones[siteKey];
-        if (!zone) return false;
-        const R = 6371e3;
-        const φ1 = lat * Math.PI/180;
-        const φ2 = zone.lat * Math.PI/180;
-        const Δφ = (zone.lat - lat) * Math.PI/180;
-        const Δλ = (zone.lng - lng) * Math.PI/180;
-        const a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
-                  Math.cos(φ1) * Math.cos(φ2) *
-                  Math.sin(Δλ/2) * Math.sin(Δλ/2);
-        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-        const distance = R * c;
-        return distance <= zone.radius;
-    }
-
-    // Activer la vérification des conditions
-    function checkReadyToPoint() {
-        const hasLocation = gpsAuthorized && currentLocation && workLocation.value;
-        let locationOk = false;
-        if (hasLocation) {
-            locationOk = isWithinZone(currentLocation.lat, currentLocation.lng, workLocation.value);
-            if (!locationOk) {
-                gpsStatusText.innerHTML = "⚠️ Hors zone autorisée";
-                gpsStatusText.style.color = "#e53e3e";
+        // 1. MATRICULE
+        matriculeInput.addEventListener('input', function() {
+            const mat = this.value.trim();
+            if (employes[mat]) {
+                currentMatricule = mat;
+                currentNom = employes[mat];
+                nomDisplay.innerHTML = `✅ Bienvenue ${currentNom}`;
+                nomDisplay.style.color = "#28a745";
+                showMessage(`Bonjour ${currentNom}`, false);
             } else {
-                gpsStatusText.innerHTML = "✅ Zone validée";
-                gpsStatusText.style.color = "#2b9348";
+                currentMatricule = null;
+                currentNom = null;
+                nomDisplay.innerHTML = mat.length > 0 ? "❌ Matricule invalide" : "";
+                nomDisplay.style.color = "#dc3545";
             }
-        }
-        const canPoint = currentEmployee !== null && photoTaken === true && locationOk === true;
-        arriveeBtn.disabled = !canPoint;
-        departBtn.disabled = !canPoint;
-        return canPoint;
-    }
+            verifierPrets();
+        });
 
-    // Quand on entre le matricule
-    matriculeInput.addEventListener('input', async function() {
-        const mat = this.value.trim();
-        if (mat.length >= 5) {
-            const workerDoc = await getDoc(doc(db, "workers", mat));
-            if (workerDoc.exists()) {
-                currentEmployee = workerDoc.data();
-                empNameSpan.innerText = currentEmployee.name;
-                empMatSpan.innerText = currentEmployee.matricule;
-                const hour = new Date().getHours();
-                let greet = "";
-                if (hour < 12) greet = "Bonjour";
-                else if (hour < 18) greet = "Bon après-midi";
-                else greet = "Bonsoir";
-                greetingMsg.innerHTML = `${greet} ${currentEmployee.name.split(' ')[0]} 👋`;
-                welcomeZone.style.display = "block";
-                // Demander automatiquement la géolocalisation
-                requestLocation();
+        // 2. GPS
+        btnGps.addEventListener('click', function() {
+            if (!navigator.geolocation) {
+                showMessage("GPS non supporté sur ce navigateur", true);
+                return;
+            }
+            
+            gpsStatus.textContent = "Recherche...";
+            gpsStatus.style.color = "#ffc107";
+            
+            navigator.geolocation.getCurrentPosition(
+                function(position) {
+                    currentPosition = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude,
+                        accuracy: position.coords.accuracy
+                    };
+                    gpsStatus.textContent = "✅ GPS actif";
+                    gpsStatus.style.color = "#28a745";
+                    gpsCoords.textContent = `${currentPosition.lat.toFixed(6)}°, ${currentPosition.lng.toFixed(6)}°`;
+                    gpsValide = true;
+                    
+                    // Vérifier si le lieu sélectionné correspond
+                    if (lieuSelect.value) {
+                        verifierLieu();
+                    }
+                    verifierPrets();
+                    showMessage("Géolocalisation activée avec succès", false);
+                },
+                function(error) {
+                    gpsValide = false;
+                    gpsStatus.textContent = "❌ GPS refusé";
+                    gpsStatus.style.color = "#dc3545";
+                    let msg = "";
+                    if (error.code === 1) msg = "Vous devez autoriser la géolocalisation";
+                    else if (error.code === 2) msg = "Position non disponible";
+                    else msg = "Erreur GPS";
+                    gpsCoords.textContent = msg;
+                    showMessage(msg, true);
+                },
+                { enableHighAccuracy: true, timeout: 10000 }
+            );
+        });
+
+        // Vérifier si l'utilisateur est dans la zone autorisée
+        function verifierLieu() {
+            const site = lieuSelect.value;
+            if (!site || !currentPosition) return false;
+            
+            const coordsSite = sitesCoords[site];
+            if (!coordsSite) return false;
+            
+            // Calcul de distance (formule Haversine)
+            const R = 6371000;
+            const lat1 = currentPosition.lat * Math.PI / 180;
+            const lat2 = coordsSite.lat * Math.PI / 180;
+            const deltaLat = (coordsSite.lat - currentPosition.lat) * Math.PI / 180;
+            const deltaLon = (coordsSite.lng - currentPosition.lng) * Math.PI / 180;
+            
+            const a = Math.sin(deltaLat/2) * Math.sin(deltaLat/2) +
+                      Math.cos(lat1) * Math.cos(lat2) *
+                      Math.sin(deltaLon/2) * Math.sin(deltaLon/2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            const distance = R * c;
+            
+            const estDansZone = distance <= coordsSite.rayon;
+            
+            if (!estDansZone) {
+                gpsStatus.textContent = "⚠️ Hors zone autorisée";
+                gpsStatus.style.color = "#dc3545";
+                gpsCoords.textContent = `Distance: ${Math.round(distance)}m (max ${coordsSite.rayon}m)`;
+                gpsValide = false;
             } else {
-                currentEmployee = null;
-                welcomeZone.style.display = "none";
-                showModal("Matricule invalide", "Cet identifiant n'existe pas", true);
+                gpsStatus.textContent = "✅ Dans la zone autorisée";
+                gpsStatus.style.color = "#28a745";
+                gpsCoords.textContent = `Distance: ${Math.round(distance)}m - OK`;
+                gpsValide = true;
             }
-        } else {
-            currentEmployee = null;
-            welcomeZone.style.display = "none";
+            
+            verifierPrets();
+            return estDansZone;
         }
-        checkReadyToPoint();
-    });
 
-    // Demander la géolocalisation
-    function requestLocation() {
-        if (!navigator.geolocation) {
-            gpsStatusText.innerHTML = "GPS non supporté";
-            return;
+        lieuSelect.addEventListener('change', function() {
+            if (currentPosition && gpsValide) {
+                verifierLieu();
+            } else if (currentPosition) {
+                verifierLieu();
+            }
+            verifierPrets();
+        });
+
+        // 3. CAMERA ET PHOTO
+        async function demarrerCamera() {
+            try {
+                if (videoStream) {
+                    videoStream.getTracks().forEach(track => track.stop());
+                }
+                videoStream = await navigator.mediaDevices.getUserMedia({ video: true });
+                video.srcObject = videoStream;
+                video.style.display = "block";
+                btnPhoto.disabled = false;
+                showMessage("Caméra prête, prenez votre selfie", false);
+            } catch (err) {
+                console.error(err);
+                btnPhoto.disabled = true;
+                showMessage("Impossible d'accéder à la caméra", true);
+            }
         }
-        gpsStatusText.innerHTML = "⌛ Autorisation GPS en cours...";
-        navigator.geolocation.getCurrentPosition(
-            (pos) => {
-                currentLocation = {
-                    lat: pos.coords.latitude,
-                    lng: pos.coords.longitude,
-                    accuracy: pos.coords.accuracy
-                };
-                gpsAuthorized = true;
-                gpsStatusText.innerHTML = "📍 GPS actif";
-                gpsStatusText.style.color = "#2b9348";
-                gpsCoordsText.innerHTML = `${currentLocation.lat.toFixed(6)} , ${currentLocation.lng.toFixed(6)} (±${Math.round(currentLocation.accuracy)}m)`;
-                checkReadyToPoint();
-                // Activer la caméra pour le selfie
-                enableCamera();
-            },
-            (err) => {
-                gpsAuthorized = false;
-                gpsStatusText.innerHTML = "❌ GPS refusé";
-                gpsStatusText.style.color = "#e53e3e";
-                gpsCoordsText.innerHTML = "Autorisez la géolocalisation pour pointer";
-                showModal("Géolocalisation", "Veuillez autoriser l'accès à votre position", true);
-            },
-            { enableHighAccuracy: true, timeout: 10000 }
-        );
-    }
 
-    requestGpsBtn.addEventListener('click', () => requestLocation());
+        btnPhoto.addEventListener('click', function() {
+            if (!videoStream) {
+                demarrerCamera();
+                return;
+            }
+            
+            // Capturer la photo
+            const context = canvas.getContext('2d');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            
+            currentPhoto = canvas.toDataURL('image/jpeg', 0.8);
+            
+            // Afficher l'aperçu
+            const img = document.createElement('img');
+            img.src = currentPhoto;
+            img.style.width = "100%";
+            img.style.borderRadius = "10px";
+            photoPreview.innerHTML = "";
+            photoPreview.appendChild(img);
+            
+            photoPrise = true;
+            btnPhoto.textContent = "✅ Photo prise";
+            btnPhoto.disabled = true;
+            
+            // Arrêter la caméra
+            if (videoStream) {
+                videoStream.getTracks().forEach(track => track.stop());
+                videoStream = null;
+                video.style.display = "none";
+            }
+            
+            verifierPrets();
+            showMessage("Selfie enregistré avec succès", false);
+        });
 
-    // Activer la caméra
-    async function enableCamera() {
-        if (videoStream) stopCamera();
-        try {
-            videoStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } });
-            video.srcObject = videoStream;
-            cameraContainer.style.display = "block";
-            takePhotoBtn.disabled = false;
-        } catch (err) {
-            console.error("Caméra bloquée");
-            showModal("Caméra", "Impossible d'accéder à votre caméra", true);
+        // Démarrer la caméra quand on commence à prendre la photo
+        btnPhoto.addEventListener('mouseenter', function() {
+            if (!videoStream && !photoPrise) {
+                demarrerCamera();
+            }
+        });
+
+        // 4. ENREGISTRER POINTAGE
+        async function enregistrerPointage(type) {
+            if (!verifierPrets()) {
+                showMessage("Veuillez compléter tous les champs", true);
+                return;
+            }
+            
+            // Vérifier à nouveau la zone
+            if (!verifierLieu()) {
+                showMessage("Vous n'êtes pas dans la zone autorisée", true);
+                return;
+            }
+            
+            btnArrivee.disabled = true;
+            btnDepart.disabled = true;
+            
+            try {
+                const siteName = lieuSelect.options[lieuSelect.selectedIndex].text;
+                
+                // Upload photo
+                const photoRef = ref(storage, `pointages/${Date.now()}_${currentMatricule}.jpg`);
+                await uploadString(photoRef, currentPhoto, 'data_url');
+                const photoURL = await getDownloadURL(photoRef);
+                
+                // Sauvegarder dans Firestore
+                await addDoc(collection(db, "pointages"), {
+                    matricule: currentMatricule,
+                    nom: currentNom,
+                    lieu: lieuSelect.value,
+                    lieuName: siteName,
+                    type: type,
+                    photoURL: photoURL,
+                    location: currentPosition,
+                    timestamp: Timestamp.now(),
+                    date: new Date().toISOString().split('T')[0],
+                    heure: new Date().toLocaleTimeString('fr-FR')
+                });
+                
+                showMessage(`✅ ${type} enregistrée à ${new Date().toLocaleTimeString('fr-FR')}`, false);
+                resetFormulaire();
+                
+            } catch (error) {
+                console.error(error);
+                showMessage("Erreur lors de l'enregistrement", true);
+                btnArrivee.disabled = false;
+                btnDepart.disabled = false;
+            }
         }
-    }
 
-    function stopCamera() {
-        if (videoStream) {
-            videoStream.getTracks().forEach(t => t.stop());
-            videoStream = null;
+        btnArrivee.addEventListener('click', () => enregistrerPointage("Arrivée"));
+        btnDepart.addEventListener('click', () => enregistrerPointage("Départ"));
+
+        // Réinitialiser
+        function resetFormulaire() {
+            currentMatricule = null;
+            currentNom = null;
+            currentPhoto = null;
+            currentPosition = null;
+            photoPrise = false;
+            gpsValide = false;
+            
+            matriculeInput.value = "";
+            lieuSelect.value = "";
+            nomDisplay.innerHTML = "";
+            gpsStatus.textContent = "Non activé";
+            gpsStatus.style.color = "#666";
+            gpsCoords.textContent = "";
+            photoPreview.innerHTML = "";
+            btnPhoto.textContent = "📷 Prendre la photo";
+            btnPhoto.disabled = true;
+            btnArrivee.disabled = true;
+            btnDepart.disabled = true;
+            
+            if (videoStream) {
+                videoStream.getTracks().forEach(track => track.stop());
+                videoStream = null;
+            }
+            video.style.display = "none";
         }
-        video.srcObject = null;
-        cameraContainer.style.display = "none";
-    }
 
-    // Prendre la photo
-    takePhotoBtn.addEventListener('click', () => {
-        if (!video.videoWidth) return;
-        canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
-        const ctx = canvas.getContext('2d');
-        ctx.save();
-        ctx.scale(-1, 1);
-        ctx.drawImage(video, -canvas.width, 0, canvas.width, canvas.height);
-        ctx.restore();
+        btnReset.addEventListener('click', resetFormulaire);
 
-        currentPhotoBase64 = canvas.toDataURL('image/jpeg', 0.8);
-        const imgElem = document.createElement('img');
-        imgElem.src = currentPhotoBase64;
-        imgElem.style.width = '100%';
-        imgElem.style.borderRadius = '24px';
-        imgElem.style.marginTop = '12px';
-        photoPreview.innerHTML = '';
-        photoPreview.appendChild(imgElem);
-        photoTaken = true;
-        photoArea.classList.add('ready');
-        takePhotoBtn.innerText = "📸 Photo prise ✓";
-        takePhotoBtn.disabled = true;
-        stopCamera();
-        checkReadyToPoint();
-        showModal("Selfie validé", "Votre photo a été enregistrée", false);
-    });
+        // Admin
+        btnAdmin.addEventListener('click', () => {
+            const email = prompt("Email administrateur:");
+            if (!email) return;
+            const password = prompt("Mot de passe:");
+            if (!password) return;
+            
+            signInWithEmailAndPassword(auth, email, password)
+                .then(() => {
+                    window.location.href = "admin.html";
+                })
+                .catch(() => {
+                    showMessage("Identifiants incorrects", true);
+                });
+        });
 
-    // Enregistrer le pointage
-    async function savePointage(type) {
-        if (!checkReadyToPoint()) {
-            showModal("Blocage", "Vérifiez : matricule, photo, GPS et lieu", true);
-            return;
-        }
-        arriveeBtn.disabled = true;
-        departBtn.disabled = true;
-        try {
-            const siteKey = workLocation.value;
-            const siteName = workLocation.options[workLocation.selectedIndex].text;
-            // Upload photo Firebase Storage
-            const photoRef = ref(storage, `pointages/${Date.now()}_${currentEmployee.matricule}.jpg`);
-            await uploadString(photoRef, currentPhotoBase64, 'data_url');
-            const photoURL = await getDownloadURL(photoRef);
-
-            await addDoc(collection(db, "pointages"), {
-                matricule: currentEmployee.matricule,
-                nom: currentEmployee.name,
-                lieu: siteKey,
-                lieuName: siteName,
-                type: type,
-                photoURL: photoURL,
-                location: currentLocation,
-                timestamp: Timestamp.now(),
-                date: new Date().toISOString().split('T')[0],
-                time: new Date().toLocaleTimeString('fr-FR')
-            });
-            showModal(`✅ ${type} enregistrée`, `${currentEmployee.name} - ${siteName} à ${new Date().toLocaleTimeString('fr-FR')}`);
-            resetForm();
-        } catch (err) {
-            console.error(err);
-            showModal("Erreur réseau", "Impossible d'enregistrer, réessayez", true);
-            arriveeBtn.disabled = false;
-            departBtn.disabled = false;
-        }
-    }
-
-    function resetForm() {
-        currentPhotoBase64 = null;
-        photoTaken = false;
-        photoPreview.innerHTML = '';
-        photoArea.classList.remove('ready');
-        takePhotoBtn.innerText = "📷 Prendre ma photo";
-        takePhotoBtn.disabled = true;
-        currentEmployee = null;
-        welcomeZone.style.display = "none";
-        matriculeInput.value = '';
-        workLocation.value = '';
-        gpsAuthorized = false;
-        currentLocation = null;
-        gpsStatusText.innerHTML = "En attente...";
-        gpsCoordsText.innerHTML = "";
-        cameraContainer.style.display = "none";
-        stopCamera();
-        arriveeBtn.disabled = true;
-        departBtn.disabled = true;
-    }
-
-    arriveeBtn.addEventListener('click', () => savePointage("Arrivée"));
-    departBtn.addEventListener('click', () => savePointage("Départ"));
-    document.getElementById('logoutBtn').addEventListener('click', () => { resetForm(); showModal("Déconnecté", "À bientôt sur KCC", false); setTimeout(() => location.reload(), 1500); });
-
-    // Admin discret
-    document.getElementById('adminBtn').addEventListener('click', () => {
-        const email = prompt("Email admin :");
-        if (!email) return;
-        const pwd = prompt("Mot de passe :");
-        signInWithEmailAndPassword(auth, email, pwd)
-            .then(() => window.location.href = 'admin.html')
-            .catch(() => showModal("Accès refusé", "Identifiants incorrects", true));
-    });
-
-    workLocation.addEventListener('change', () => checkReadyToPoint());
-</script>
+        console.log("Application KCC prête - Version simple et fonctionnelle");
+    </script>
 </body>
 </html>

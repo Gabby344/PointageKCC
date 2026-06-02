@@ -5,20 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KCC Admin</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: Arial, sans-serif;
             background: #f0f2f5;
             padding: 20px;
         }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+        .container { max-width: 1400px; margin: 0 auto; }
         .header {
             background: #003366;
             color: white;
@@ -28,10 +21,12 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
         }
         .stats {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 15px;
             margin-bottom: 20px;
         }
@@ -40,12 +35,9 @@
             padding: 20px;
             border-radius: 15px;
             text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-        .stat-number {
-            font-size: 32px;
-            font-weight: bold;
-            color: #003366;
-        }
+        .stat-number { font-size: 32px; font-weight: bold; color: #003366; }
         .filters {
             background: white;
             padding: 15px;
@@ -68,6 +60,8 @@
             border-radius: 8px;
             cursor: pointer;
         }
+        .btn-danger { background: #dc3545; }
+        .btn-success { background: #28a745; }
         table {
             width: 100%;
             background: white;
@@ -84,55 +78,26 @@
             padding: 12px;
             border-bottom: 1px solid #ddd;
         }
-        .badge-success {
-            background: #28a745;
-            color: white;
-            padding: 4px 8px;
-            border-radius: 20px;
-            font-size: 12px;
-        }
-        .badge-warning {
-            background: #ffc107;
-            color: #333;
-            padding: 4px 8px;
-            border-radius: 20px;
-            font-size: 12px;
-        }
-        .thumbnail {
-            width: 40px;
-            height: 40px;
-            object-fit: cover;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-        .logout {
-            background: #dc3545;
-        }
+        .badge-success { background: #28a745; color: white; padding: 4px 8px; border-radius: 20px; font-size: 12px; display: inline-block; }
+        .badge-warning { background: #ffc107; color: #333; padding: 4px 8px; border-radius: 20px; font-size: 12px; display: inline-block; }
+        .thumbnail { width: 40px; height: 40px; object-fit: cover; border-radius: 8px; cursor: pointer; }
+        .table-container { overflow-x: auto; }
         @media (max-width: 700px) {
-            th, td { font-size: 12px; padding: 8px; }
+            th, td { font-size: 11px; padding: 6px; }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>📊 Administration KCC</h1>
-            <button class="logout" onclick="logout()">Déconnexion</button>
+            <h1>📊 KCC Administration</h1>
+            <button id="logoutBtn" class="btn-danger">Déconnexion</button>
         </div>
 
         <div class="stats">
-            <div class="stat-card">
-                <div class="stat-number" id="totalToday">0</div>
-                <div>Pointages aujourd'hui</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number" id="arriveesToday">0</div>
-                <div>Arrivées</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number" id="departsToday">0</div>
-                <div>Départs</div>
-            </div>
+            <div class="stat-card"><div class="stat-number" id="totalToday">0</div><div>Pointages aujourd'hui</div></div>
+            <div class="stat-card"><div class="stat-number" id="arriveesToday">0</div><div>Arrivées</div></div>
+            <div class="stat-card"><div class="stat-number" id="departsToday">0</div><div>Départs</div></div>
         </div>
 
         <div class="filters">
@@ -144,63 +109,41 @@
                 <option value="Hotel_Kolwezi_Lodge">Hotel Kolwezi Lodge</option>
                 <option value="Direction_KCC">Direction KCC</option>
             </select>
-            <button onclick="loadData()">Filtrer</button>
-            <button onclick="exportCSV()">Exporter CSV</button>
+            <select id="filterType">
+                <option value="">Tous</option>
+                <option value="Arrivée">Arrivées</option>
+                <option value="Départ">Départs</option>
+            </select>
+            <button id="filterBtn">Filtrer</button>
+            <button id="exportBtn" class="btn-success">Exporter CSV</button>
+            <button id="refreshBtn">🔄 Actualiser</button>
         </div>
 
-        <div style="overflow-x: auto;">
+        <div class="table-container">
             <table id="table">
-                <thead>
-                    <tr>
-                        <th>Employé</th>
-                        <th>Matricule</th>
-                        <th>Lieu</th>
-                        <th>Type</th>
-                        <th>Date</th>
-                        <th>Heure</th>
-                        <th>Photo</th>
-                    </tr>
-                </thead>
-                <tbody id="tableBody">
-                    <tr><td colspan="7" style="text-align:center;">Chargement...</td></tr>
-                </tbody>
+                <thead><tr><th>Employé</th><th>Matricule</th><th>Lieu</th><th>Type</th><th>Date</th><th>Heure</th><th>Photo</th></tr></thead>
+                <tbody id="tableBody"><tr><td colspan="7">Chargement...</td></tr></tbody>
             </table>
         </div>
     </div>
 
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-        import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
-        import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { auth, db } from './firebase-config.js';
+        import { signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+        import { collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyDkCnxIDdzngjnltxC9IBCV1Fk2JYSrKM0",
-            authDomain: "pointage-app-42339.firebaseapp.com",
-            projectId: "pointage-app-42339",
-            storageBucket: "pointage-app-42339.firebasestorage.app",
-            appId: "1:63257821944:web:e8e06472eacee7675eb10d"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
+        onAuthStateChanged(auth, (user) => {
+            if (!user) window.location.href = 'index.html';
+            else { loadData(); setInterval(loadData, 30000); }
+        });
 
         let allData = [];
 
-        onAuthStateChanged(auth, (user) => {
-            if (!user) {
-                window.location.href = 'index.html';
-            } else {
-                loadData();
-                setInterval(loadData, 30000);
-            }
-        });
-
         async function loadData() {
             const q = query(collection(db, "pointages"), orderBy("timestamp", "desc"));
-            const snapshot = await getDocs(q);
+            const snap = await getDocs(q);
             allData = [];
-            snapshot.forEach(doc => allData.push(doc.data()));
+            snap.forEach(doc => allData.push(doc.data()));
             displayTable();
             updateStats();
         }
@@ -208,10 +151,12 @@
         function displayTable() {
             const date = document.getElementById('filterDate').value;
             const site = document.getElementById('filterSite').value;
+            const type = document.getElementById('filterType').value;
             
             let filtered = allData.filter(p => {
                 if (date && p.date !== date) return false;
                 if (site && p.lieu !== site) return false;
+                if (type && p.type !== type) return false;
                 return true;
             });
             
@@ -223,7 +168,7 @@
             
             tbody.innerHTML = filtered.map(p => `
                 <tr>
-                    <td>${p.nom || '-'}</td>
+                    <td><strong>${p.nom || '-'}</strong></td>
                     <td>${p.matricule || '-'}</td>
                     <td>${p.lieuName || p.lieu || '-'}</td>
                     <td><span class="${p.type === 'Arrivée' ? 'badge-success' : 'badge-warning'}">${p.type}</span></td>
@@ -242,24 +187,19 @@
             document.getElementById('departsToday').textContent = todayData.filter(p => p.type === 'Départ').length;
         }
 
-        function exportCSV() {
-            const headers = ['Nom', 'Matricule', 'Lieu', 'Type', 'Date', 'Heure', 'Latitude', 'Longitude'];
-            const rows = allData.map(p => [p.nom, p.matricule, p.lieuName, p.type, p.date, p.heure, p.location?.lat || '', p.location?.lng || '']);
+        document.getElementById('filterBtn').onclick = () => displayTable();
+        document.getElementById('refreshBtn').onclick = () => loadData();
+        document.getElementById('exportBtn').onclick = () => {
+            const headers = ['Nom','Matricule','Lieu','Type','Date','Heure'];
+            const rows = allData.map(p => [p.nom, p.matricule, p.lieuName, p.type, p.date, p.heure]);
             const csv = [headers, ...rows].map(r => r.join(',')).join('\n');
             const blob = new Blob(["\uFEFF" + csv], { type: 'text/csv' });
             const a = document.createElement('a');
             a.href = URL.createObjectURL(blob);
             a.download = `pointages_${new Date().toISOString().split('T')[0]}.csv`;
             a.click();
-        }
-
-        window.logout = async () => {
-            await signOut(auth);
-            window.location.href = 'index.html';
         };
-        
-        window.loadData = loadData;
-        window.exportCSV = exportCSV;
+        document.getElementById('logoutBtn').onclick = async () => { await signOut(auth); window.location.href = 'index.html'; };
     </script>
 </body>
 </html>
